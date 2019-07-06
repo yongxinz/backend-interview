@@ -17,7 +17,7 @@
 
 <!-- /TOC -->
 ## 编程语言
-### 1、Python 实现单例模式
+### 1、Python实现单例模式
 
 #### 方法一 使用__new__实现单例模式
 > 使用__new__实现单例模式，具体我对__new__的理解可以点[这里](http://www.cnblogs.com/qiaojushuang/p/7805973.html)
@@ -120,8 +120,8 @@ print a.val, b.val
 
 ## 数据结构
 
-### 2、二维数组中的查找 [LeetCode](https://leetcode.com/problems/search-a-2d-matrix-ii/)
-> 题目：二维数组中，每行从左到右递增，每列从上到下递增，给出一个数，判断它是否在数组中
+### 2、二维数组中的查找
+> 题目：二维数组中，每行从左到右递增，每列从上到下递增，给出一个数，判断它是否在数组中 ([LeetCode](https://leetcode.com/problems/search-a-2d-matrix-ii/))
 >
 > 思路：从左下角或者右上角开始比较
 
