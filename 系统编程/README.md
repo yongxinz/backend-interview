@@ -1,0 +1,371 @@
+<!-- TOC -->
+
+- [系统编程](#系统编程)
+    - [106.进程总结](#106进程总结)
+    - [107.谈谈你对多进程，多线程，以及协程的理解，项目是否用？](#107谈谈你对多进程多线程以及协程的理解项目是否用)
+    - [108.Python异步使用场景有那些？](#108python异步使用场景有那些)
+    - [109.多线程共同操作同一个数据互斥锁同步？](#109多线程共同操作同一个数据互斥锁同步)
+    - [110.什么是多线程竞争？](#110什么是多线程竞争)
+    - [111.请介绍一下Python的线程同步？](#111请介绍一下python的线程同步)
+    - [112.解释以下什么是锁，有哪几种锁？](#112解释以下什么是锁有哪几种锁)
+    - [113.什么是死锁？](#113什么是死锁)
+    - [114.多线程交互访问数据，如果访问到了就不访问了？](#114多线程交互访问数据如果访问到了就不访问了)
+    - [115.什么是线程安全，什么是互斥锁？](#115什么是线程安全什么是互斥锁)
+    - [116.说说下面几个概念：同步，异步，阻塞，非阻塞？](#116说说下面几个概念同步异步阻塞非阻塞)
+    - [117.什么是僵尸进程和孤儿进程？怎么避免僵尸进程？](#117什么是僵尸进程和孤儿进程怎么避免僵尸进程)
+    - [118.python中进程与线程的使用场景？](#118python中进程与线程的使用场景)
+    - [119.线程是并发还是并行，进程是并发还是并行？](#119线程是并发还是并行进程是并发还是并行)
+    - [120.并行(parallel)和并发（concurrency)?](#120并行parallel和并发concurrency)
+    - [121.IO密集型和CPU密集型区别？](#121io密集型和cpu密集型区别)
+    - [122.python asyncio的原理？](#122python-asyncio的原理)
+
+<!-- /TOC -->
+
+## 系统编程
+### 106.进程总结
+进程：程序运行在操作系统上的一个实例，就称之为进程。进程需要相应的系统资源：内存、时间片、pid。
+创建进程：
+首先要导入multiprocessing中的Process：
+创建一个Process对象;
+创建Process对象时，可以传递参数;
+```python
+p = Process(target=XXX,args=(tuple,),kwargs={key:value})
+target = XXX 指定的任务函数，不用加(),
+args=(tuple,)kwargs={key:value}给任务函数传递的参数
+```
+使用start()启动进程
+结束进程
+给子进程指定函数传递参数Demo
+```python
+import os
+from mulitprocessing import Process
+import time
+
+def pro_func(name,age,**kwargs):
+    for i in range(5):
+        print("子进程正在运行中，name=%s,age=%d,pid=%d"%(name,age,os.getpid()))
+        print(kwargs)
+        time.sleep(0.2)
+if __name__ =="__main__":
+    #创建Process对象
+    p = Process(target=pro_func,args=('小明',18),kwargs={'m':20})
+    #启动进程
+    p.start()
+    time.sleep(1)
+    #1秒钟之后，立刻结束子进程
+    p.terminate()
+    p.join()
+```
+注意：进程间不共享全局变量
+
+进程之间的通信-Queue
+
+在初始化Queue()对象时（例如q=Queue(),若在括号中没有指定最大可接受的消息数量，获数量为负值时，那么就代表可接受的消息数量没有上限一直到内存尽头）
+
+Queue.qsize():返回当前队列包含的消息数量
+
+Queue.empty():如果队列为空，返回True，反之False
+
+Queue.full():如果队列满了，返回True,反之False
+
+Queue.get([block[,timeout]]):获取队列中的一条消息，然后将其从队列中移除，
+
+block默认值为True。
+
+如果block使用默认值，且没有设置timeout（单位秒),消息队列如果为空，此时程序将被阻塞（停在读中状态），直到消息队列读到消息为止，如果设置了timeout，则会等待timeout秒，若还没读取到任何消息，则抛出“Queue.Empty"异常：
+
+Queue.get_nowait()相当于Queue.get(False)
+
+Queue.put(item,[block[,timeout]]):将item消息写入队列，block默认值为True;
+如果block使用默认值，且没有设置timeout（单位秒），消息队列如果已经没有空间可写入，此时程序将被阻塞（停在写入状态），直到从消息队列腾出空间为止，如果设置了timeout，则会等待timeout秒，若还没空间，则抛出”Queue.Full"异常
+如果block值为False，消息队列如果没有空间可写入，则会立刻抛出"Queue.Full"异常;
+Queue.put_nowait(item):相当Queue.put(item,False)
+
+进程间通信Demo:
+```python
+from multiprocessing import Process.Queue
+import os,time,random
+#写数据进程执行的代码：
+def write(q):
+    for value in ['A','B','C']:
+        print("Put %s to queue...",%value)
+        q.put(value)
+        time.sleep(random.random())
+#读数据进程执行的代码
+def read(q):
+    while True:
+        if not q.empty():
+            value = q.get(True)
+            print("Get %s from queue.",%value)
+            time.sleep(random.random())
+        else:
+            break
+if __name__=='__main__':
+    #父进程创建Queue，并传给各个子进程
+    q = Queue()
+    pw = Process(target=write,args=(q,))
+    pr = Process(target=read,args=(q,))
+    #启动子进程pw ，写入：
+    pw.start()
+    #等待pw结束
+    pw.join()
+    #启动子进程pr，读取：
+    pr.start()
+    pr.join()
+    #pr 进程里是死循环，无法等待其结束，只能强行终止:
+    print('')
+    print('所有数据都写入并且读完')
+```
+    进程池Pool
+```python
+#coding:utf-8
+from multiprocessing import Pool
+import os,time,random
+
+def worker(msg):
+    t_start = time.time()
+    print("%s 开始执行，进程号为%d"%(msg,os.getpid()))
+    # random.random()随机生成0-1之间的浮点数
+    time.sleep(random.random()*2)
+    t_stop = time.time()
+    print(msg,"执行完毕，耗时%0.2f”%（t_stop-t_start))
+
+po = Pool(3)#定义一个进程池，最大进程数3
+for i in range(0,10):
+    po.apply_async(worker,(i,))
+print("---start----")
+po.close()
+po.join()
+print("----end----")
+```
+进程池中使用Queue
+
+如果要使用Pool创建进程，就需要使用multiprocessing.Manager()中的Queue(),而不是multiprocessing.Queue(),否则会得到如下的错误信息：
+
+RuntimeError： Queue objects should only be shared between processs through inheritance
+```python
+from multiprocessing import Manager,Pool
+import os,time,random
+def reader(q):
+    print("reader 启动(%s),父进程为（%s)"%(os.getpid(),os.getpid()))
+    for i in range(q.qsize()):
+        print("reader 从Queue获取到消息:%s"%q.get(True))
+
+def writer(q):
+    print("writer 启动（%s),父进程为(%s)"%(os.getpid(),os.getpid()))
+    for i ini "itcast":
+        q.put(i)
+if __name__ == "__main__":
+    print("(%s)start"%os.getpid())
+    q = Manager().Queue()#使用Manager中的Queue
+    po = Pool()
+    po.apply_async(wrtier,(q,))
+    time.sleep(1)
+    po.apply_async(reader,(q,))
+    po.close()
+    po.join()
+    print("(%s)End"%os.getpid())
+```
+### 107.谈谈你对多进程，多线程，以及协程的理解，项目是否用？
+这个问题被问的概念相当之大，
+进程：一个运行的程序（代码）就是一个进程，没有运行的代码叫程序，进程是系统资源分配的最小单位，进程拥有自己独立的内存空间，所有进程间数据不共享，开销大。
+
+线程: cpu调度执行的最小单位，也叫执行路径，不能独立存在，依赖进程存在，一个进程至少有一个线程，叫主线程，而多个线程共享内存（数据共享，共享全局变量),从而极大地提高了程序的运行效率。
+
+协程: 是一种用户态的轻量级线程，协程的调度完全由用户控制。协程拥有自己的寄存器上下文和栈。协程调度时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈，直接操中栈则基本没有内核切换的开销，可以不加锁的访问全局变量，所以上下文的切换非常快。
+
+### 108.Python异常使用场景有那些？
+异步的使用场景:
+
+1、 不涉及共享资源，获对共享资源只读，即非互斥操作
+
+2、 没有时序上的严格关系
+
+3、 不需要原子操作，或可以通过其他方式控制原子性
+
+4、 常用于IO操作等耗时操作，因为比较影响客户体验和使用性能
+
+5、 不影响主线程逻辑
+
+### 109.多线程共同操作同一个数据互斥锁同步？
+```python
+import threading
+import time
+class MyThread(threading.Thread):
+    def run(self):
+        global num
+        time.sleep(1)
+    
+        if mutex.acquire(1):
+            num +=1
+            msg = self.name + 'set num to ' +str(num)
+            print msg
+            mutex.release()
+num = 0
+mutex = threading.Lock()
+def test():
+    for i in range(5):
+        t = MyThread()
+        t.start()
+if __name__=="__main__":
+    test()
+```
+### 110.什么是多线程竞争？
+线程是非独立的，同一个进程里线程是数据共享的，当各个线程访问数据资源时会出现竞争状态即：数据几乎同步会被多个线程占用，造成数据混乱，即所谓的线程不安全
+
+那么怎么解决多线程竞争问题？---锁
+
+锁的好处： 确保了某段关键代码（共享数据资源）只能由一个线程从头到尾完整地执行能解决多线程资源竞争下的原子操作问题。
+
+锁的坏处： 阻止了多线程并发执行，包含锁的某段代码实际上只能以单线程模式执行，效率就大大地下降了
+
+锁的致命问题: 死锁
+### 111.请介绍一下Python的线程同步？
+ 一、 setDaemon(False)
+当一个进程启动之后，会默认产生一个主线程，因为线程是程序执行的最小单位，当设置多线程时，主线程会创建多个子线程，在Python中，默认情况下就是setDaemon(False),主线程执行完自己的任务以后，就退出了，此时子线程会继续执行自己的任务，直到自己的任务结束。
+
+例子
+```python
+import threading 
+import time
+
+def thread():
+    time.sleep(2)
+    print('---子线程结束---')
+
+def main():
+    t1 = threading.Thread(target=thread)
+    t1.start()
+    print('---主线程--结束')
+
+if __name__ =='__main__':
+    main()
+#执行结果
+---主线程--结束
+---子线程结束---
+```
+二、 setDaemon（True)
+当我们使用setDaemon(True)时，这是子线程为守护线程，主线程一旦执行结束，则全部子线程被强制终止
+
+例子
+```python
+import threading
+import time
+def thread():
+    time.sleep(2)
+    print(’---子线程结束---')
+def main():
+    t1 = threading.Thread(target=thread)
+    t1.setDaemon(True)#设置子线程守护主线程
+    t1.start()
+    print('---主线程结束---')
+
+if __name__ =='__main__':
+    main()
+#执行结果
+---主线程结束--- #只有主线程结束，子线程来不及执行就被强制结束
+```
+三、 join（线程同步)
+join 所完成的工作就是线程同步，即主线程任务结束以后，进入堵塞状态，一直等待所有的子线程结束以后，主线程再终止。
+
+当设置守护线程时，含义是主线程对于子线程等待timeout的时间将会杀死该子线程，最后退出程序，所以说，如果有10个子线程，全部的等待时间就是每个timeout的累加和，简单的来说，就是给每个子线程一个timeou的时间，让他去执行，时间一到，不管任务有没有完成，直接杀死。
+
+没有设置守护线程时，主线程将会等待timeout的累加和这样的一段时间，时间一到，主线程结束，但是并没有杀死子线程，子线程依然可以继续执行，直到子线程全部结束，程序退出。
+
+例子
+```python
+import threading
+import time
+
+def thread():
+    time.sleep(2)
+    print('---子线程结束---')
+
+def main():
+    t1 = threading.Thread(target=thread)
+    t1.setDaemon(True)
+    t1.start()
+    t1.join(timeout=1)#1 线程同步，主线程堵塞1s 然后主线程结束，子线程继续执行
+                        #2 如果不设置timeout参数就等子线程结束主线程再结束
+                        #3 如果设置了setDaemon=True和timeout=1主线程等待1s后会强制杀死子线程，然后主线程结束
+    print('---主线程结束---')
+
+if __name__=='__main___':
+    main()
+```
+### 112.解释以下什么是锁，有哪几种锁？
+锁(Lock)是python提供的对线程控制的对象。有互斥锁，可重入锁，死锁。
+
+### 113.什么是死锁？
+若干子线程在系统资源竞争时，都在等待对方对某部分资源解除占用状态，结果是谁也不愿先解锁，互相干等着，程序无法执行下去，这就是死锁。
+
+GIL锁 全局解释器锁
+
+作用： 限制多线程同时执行，保证同一时间只有一个线程执行，所以cython里的多线程其实是伪多线程！
+
+所以python里常常使用协程技术来代替多线程，协程是一种更轻量级的线程。
+
+进程和线程的切换时由系统决定，而协程由我们程序员自己决定，而模块gevent下切换是遇到了耗时操作时才会切换
+
+三者的关系：进程里有线程，线程里有协程。
+### 114.多线程交互访问数据，如果访问到了就不访问了？
+怎么避免重读？
+
+创建一个已访问数据列表，用于存储已经访问过的数据，并加上互斥锁，在多线程访问数据的时候先查看数据是否在已访问的列表中，若已存在就直接跳过。
+
+### 115.什么是线程安全，什么是互斥锁？
+每个对象都对应于一个可称为’互斥锁‘的标记，这个标记用来保证在任一时刻，只能有一个线程访问该对象。
+
+同一进程中的多线程之间是共享系统资源的，多个线程同时对一个对象进行操作，一个线程操作尚未结束，另一线程已经对其进行操作，导致最终结果出现错误，此时需要对被操作对象添加互斥锁，保证每个线程对该对象的操作都得到正确的结果。
+
+### 116.说说下面几个概念：同步，异步，阻塞，非阻塞？
+同步： 多个任务之间有先后顺序执行，一个执行完下个才能执行。
+
+异步： 多个任务之间没有先后顺序，可以同时执行，有时候一个任务可能要在必要的时候获取另一个同时执行的任务的结果，这个就叫回调！
+
+阻塞： 如果卡住了调用者，调用者不能继续往下执行，就是说调用者阻塞了。
+
+非阻塞： 如果不会卡住，可以继续执行，就是说非阻塞的。
+
+同步异步相对于多任务而言，阻塞非阻塞相对于代码执行而言。
+
+### 117.什么是僵尸进程和孤儿进程？怎么避免僵尸进程？
+孤儿进程： 父进程退出，子进程还在运行的这些子进程都是孤儿进程，孤儿进程将被init 进程（进程号为1）所收养，并由init 进程对他们完成状态收集工作。
+
+僵尸进程： 进程使用fork 创建子进程，如果子进程退出，而父进程并没有调用wait 获waitpid 获取子进程的状态信息，那么子进程的进程描述符仍然保存在系统中的这些进程是僵尸进程。
+
+避免僵尸进程的方法：
+
+1.fork 两次用孙子进程去完成子进程的任务
+
+2.用wait()函数使父进程阻塞
+
+3.使用信号量，在signal handler 中调用waitpid,这样父进程不用阻塞
+###  118.python中进程与线程的使用场景？
+多进程适合在CPU密集操作（cpu操作指令比较多，如位多的的浮点运算）。
+
+多线程适合在IO密性型操作（读写数据操作比多的的，比如爬虫）
+
+###  119.线程是并发还是并行，进程是并发还是并行？
+线程是并发，进程是并行;
+
+进程之间互相独立，是系统分配资源的最小单位，同一个线程中的所有线程共享资源。
+
+### 120.并行(parallel)和并发（concurrency)?
+并行： 同一时刻多个任务同时在运行
+
+不会在同一时刻同时运行，存在交替执行的情况。
+
+实现并行的库有： multiprocessing
+
+实现并发的库有:  threading
+
+程序需要执行较多的读写、请求和回复任务的需要大量的IO操作，IO密集型操作使用并发更好。
+
+CPU运算量大的程序，使用并行会更好
+### 121.IO密集型和CPU密集型区别？
+IO密集型： 系统运行，大部分的状况是CPU在等 I/O（硬盘/内存）的读/写
+
+CPU密集型： 大部分时间用来做计算，逻辑判断等CPU动作的程序称之CPU密集型。
+### 122.python asyncio的原理？
+asyncio这个库就是使用python的yield这个可以打断保存当前函数的上下文的机制， 封装好了selector 摆脱掉了复杂的回调关系
