@@ -17,7 +17,6 @@
         - [11.写一个列表生成式，产生一个公差为11的等差数列](#11写一个列表生成式产生一个公差为11的等差数列)
         - [12.给定两个列表，怎么找出他们相同的元素和不同的元素？](#12给定两个列表怎么找出他们相同的元素和不同的元素)
         - [13.请写出一段python代码实现删除list里面的重复元素？](#13请写出一段python代码实现删除list里面的重复元素)
-        - [14.给定两个list A，B ,请用找出A，B中相同与不同的元素](#14给定两个list-ab-请用找出ab中相同与不同的元素)
     - [企业面试题](#企业面试题)
         - [15.python新式类和经典类的区别？](#15python新式类和经典类的区别)
         - [16.python中内置的数据结构有几种？](#16python中内置的数据结构有几种)
@@ -34,7 +33,6 @@
         - [27.Python中变量的作用域？（变量查找顺序)](#27python中变量的作用域变量查找顺序)
         - [28.字符串 `"123"` 转换成 `123`，不使用内置api，例如 `int()`](#28字符串-123-转换成-123不使用内置api例如-int)
         - [29.Given an array of integers](#29given-an-array-of-integers)
-        - [30.python代码实现删除一个list里面的重复元素](#30python代码实现删除一个list里面的重复元素)
         - [31.统计一个文本中单词频次最高的10个单词？](#31统计一个文本中单词频次最高的10个单词)
         - [32.请写出一个函数满足以下条件](#32请写出一个函数满足以下条件)
         - [33.使用单一的列表生成式来产生一个新的列表](#33使用单一的列表生成式来产生一个新的列表)
@@ -352,11 +350,7 @@ for i in l1:
         l2.append(i)
 print(l2)
 ```
-### 14.给定两个list A，B ,请用找出A，B中相同与不同的元素
-```python
-A,B 中相同元素： print(set(A)&set(B))
-A,B 中不同元素:  print(set(A)^set(B))
-```
+
 ## 企业面试题
 ### 15.python新式类和经典类的区别？
 a. 在python里凡是继承了object的类，都是新式类
@@ -367,12 +361,12 @@ c. Python2里面继承object的是新式类，没有写父类的是经典类
 
 d. 经典类目前在Python里基本没有应用
 
-e.经典类的MRO是深度优先搜索，新式类的MRO是广度优先搜索
+e. 经典类的MRO是深度优先搜索，新式类的MRO是广度优先搜索
 
 ### 16.python中内置的数据结构有几种？
 a. 整型 int、 长整型 long、浮点型 float、 复数 complex
 
-b. 字符串 str、 列表 list、 元祖 tuple
+b. 字符串 str、 列表 list、 元组 tuple
 
 c. 字典 dict 、 集合 set
 
@@ -486,7 +480,7 @@ def scan_path(ph):
     file_list = os.listdir(ph)
     for obj in file_list:
         if os.path.isfile(obj):
-    pick(obj)
+            pick(obj)
         elif os.path.isdir(obj):
             scan_path(obj)
     
@@ -691,38 +685,7 @@ print(result)  # [0, 1]
 ```python
 alist_sort = sorted(alist, key=lambda e: e.get("age"), reverse=True)
 ```
-
-### 30.python代码实现删除一个list里面的重复元素
-```python
-def distFunc1(a):
-    """使用集合去重"""
-    a = list(set(a))
-    print(a)
-
-def distFunc2(a):
-    """将一个列表的数据取出放到另一个列表中，中间作判断"""
-    list = []
-    for i in a:
-        if i not in list:
-            list.append(i)
-    #如果需要排序的话用sort
-    list.sort()
-    print(list)
-
-def distFunc3(a):
-    """使用字典"""
-    b = {}
-    b = b.fromkeys(a)
-    c = list(b.keys())
-    print(c)
-
-if __name__ == "__main__":
-    a = [1,2,4,2,4,5,7,10,5,5,7,8,9,0,3]
-    distFunc1(a)
-    distFunc2(a)
-    distFunc3(a)
   
-```
 ### 31.统计一个文本中单词频次最高的10个单词？
 ```python
 import re
