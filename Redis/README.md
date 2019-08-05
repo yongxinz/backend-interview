@@ -1,17 +1,17 @@
 <!-- TOC -->
 
 - [Redis](#redis)
-    - [207.Redis宕机怎么解决?](#207redis宕机怎么解决)
-    - [208.redis和mecached的区别，以及使用场景](#208redis和mecached的区别以及使用场景)
-    - [209.Redis集群方案该怎么做?都有哪些方案?](#209redis集群方案该怎么做都有哪些方案)
-    - [210.Redis回收进程是如何工作的](#210redis回收进程是如何工作的)
+  - [207.Redis宕机怎么解决?](#207redis%e5%ae%95%e6%9c%ba%e6%80%8e%e4%b9%88%e8%a7%a3%e5%86%b3)
+  - [208.redis和mecached的区别，以及使用场景](#208redis%e5%92%8cmecached%e7%9a%84%e5%8c%ba%e5%88%ab%e4%bb%a5%e5%8f%8a%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af)
+  - [209.Redis集群方案该怎么做?都有哪些方案?](#209redis%e9%9b%86%e7%be%a4%e6%96%b9%e6%a1%88%e8%af%a5%e6%80%8e%e4%b9%88%e5%81%9a%e9%83%bd%e6%9c%89%e5%93%aa%e4%ba%9b%e6%96%b9%e6%a1%88)
+  - [210.Redis回收进程是如何工作的](#210redis%e5%9b%9e%e6%94%b6%e8%bf%9b%e7%a8%8b%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84)
 
 <!-- /TOC -->
 
 ## Redis
 ### 207.Redis宕机怎么解决?
 
-宕机:服务器停止服务‘
+宕机:服务器停止服务
 
 如果只有一台redis，肯定 会造成数据丢失，无法挽救
 
