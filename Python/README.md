@@ -20,7 +20,6 @@
     - [企业面试题](#企业面试题)
         - [15.python新式类和经典类的区别？](#15python新式类和经典类的区别)
         - [16.python中内置的数据结构有几种？](#16python中内置的数据结构有几种)
-        - [17.python如何实现单例模式?请写出两种实现方式?](#17python如何实现单例模式请写出两种实现方式)
         - [18.反转一个整数，例如-123 --> -321](#18反转一个整数例如-123-----321)
         - [19.设计实现遍历目录与子目录，抓取.pyc文件](#19设计实现遍历目录与子目录抓取pyc文件)
         - [20.一行代码实现1-100之和](#20一行代码实现1-100之和)
@@ -32,7 +31,7 @@
         - [26.用一行python代码写出1+2+3+10248](#26用一行python代码写出12310248)
         - [27.Python中变量的作用域？（变量查找顺序)](#27python中变量的作用域变量查找顺序)
         - [28.字符串 `"123"` 转换成 `123`，不使用内置api，例如 `int()`](#28字符串-123-转换成-123不使用内置api例如-int)
-        - [29.Given an array of integers](#29given-an-array-of-integers)
+        - [29.给定一个整数数组和一个目标值，找出数组中和为目标值的两个数](#29给定一个整数数组和一个目标值，找出数组中和为目标值的两个数)
         - [31.统计一个文本中单词频次最高的10个单词？](#31统计一个文本中单词频次最高的10个单词)
         - [32.请写出一个函数满足以下条件](#32请写出一个函数满足以下条件)
         - [33.使用单一的列表生成式来产生一个新的列表](#33使用单一的列表生成式来产生一个新的列表)
@@ -208,7 +207,7 @@ if __name__ == '__main__':
     for e in get_lines():
         process(e) # 处理每一行数据
 ```
-现在要处理一个大小为10G的文件，但是内存只有4G，如果在只修改get_lines 函数而其他代码保持不变的情况下，应该如何实现？需要考虑的问题都有那些？
+现在要处理一个大小为10G的文件，但是内存只有4G，如果在只修改 `get_lines` 函数而其他代码保持不变的情况下，应该如何实现？需要考虑的问题都有那些？
 ```python
 def get_lines():
     with open('file.txt','rb') as f:
@@ -284,7 +283,8 @@ d = {key:value for (key,value) in iterable}
 ```python
 print("aStr"[::-1])
 ```
-### 8.将字符串 "k:1 |k1:2|k2:3|k3:4"，处理成字典 {k:1,k1:2,...}
+
+### 8.将字符串 "k:1|k1:2|k2:3|k3:4"，处理成字典 {k:1,k1:2,...}
 ```python
 str1 = "k:1|k1:2|k2:3|k3:4"
 def str2dict(str1):
@@ -296,22 +296,26 @@ def str2dict(str1):
 #字典推导式
 d = {k:int(v) for t in str1.split("|") for k, v in (t.split(":"), )}
 ```
+
 ### 9.请按alist中元素的age由大到小排序
 ```python
 alist = [{'name':'a','age':20},{'name':'b','age':30},{'name':'c','age':25}]
 def sort_by_age(list1):
     return sorted(alist,key=lambda x:x['age'],reverse=True)
 ```
+
 ### 10.下面代码的输出结果将是什么？
 ```python
 list = ['a','b','c','d','e']
 print(list[10:])
 ```
-代码将输出[],不会产生IndexError错误，就像所期望的那样，尝试用超出成员的个数的index来获取某个列表的成员。例如，尝试获取list[10]和之后的成员，会导致IndexError。然而，尝试获取列表的切片，开始的index超过了成员个数不会产生IndexError，而是仅仅返回一个空列表。这成为特别让人恶心的疑难杂症，因为运行的时候没有错误产生，导致Bug很难被追踪到。
+代码将输出 `[]`,不会产生IndexError错误，就像所期望的那样，尝试用超出成员的个数的index来获取某个列表的成员。例如，尝试获取list[10]和之后的成员，会导致IndexError。然而，尝试获取列表的切片，开始的index超过了成员个数不会产生IndexError，而是仅仅返回一个空列表。这成为特别让人恶心的疑难杂症，因为运行的时候没有错误产生，导致Bug很难被追踪到。
+
 ### 11.写一个列表生成式，产生一个公差为11的等差数列
 ```python
 print([x*11 for x in range(10)])
 ```
+
 ### 12.给定两个列表，怎么找出他们相同的元素和不同的元素？
 ```python
 list1 = [1,2,3]
@@ -371,65 +375,6 @@ c. 字典 dict 、 集合 set
 
 d. Python3 中没有 long，只有无限精度的 int
 
-### 17.python如何实现单例模式?请写出两种实现方式?
-第一种方法:使用装饰器
-```python
-def singleton(cls):
-    instances = {}
-    def wrapper(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-    return wrapper
-    
-    
-@singleton
-class Foo(object):
-    pass
-foo1 = Foo()
-foo2 = Foo()
-print(foo1 is foo2)  # True
-```
-第二种方法：使用基类
-New 是真正创建实例对象的方法，所以重写基类的new 方法，以此保证创建对象的时候只生成一个实例
-```python
-class Singleton(object):
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, '_instance'):
-            cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
-        return cls._instance
-    
-    
-class Foo(Singleton):
-    pass
-
-foo1 = Foo()
-foo2 = Foo()
-
-print(foo1 is foo2)  # True
-```
-第三种方法：元类，元类是用于创建类对象的类，类对象创建实例对象时一定要调用call方法，因此在调用call时候保证始终只创建一个实例即可，type是python的元类
-```python
-class Singleton(type):
-    def __call__(cls, *args, **kwargs):
-        if not hasattr(cls, '_instance'):
-            cls._instance = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instance
-
-
-# Python2
-class Foo(object):
-    __metaclass__ = Singleton
-
-# Python3
-class Foo(metaclass=Singleton):
-    pass
-
-foo1 = Foo()
-foo2 = Foo()
-print(foo1 is foo2)  # True
-
-```
 ### 18.反转一个整数，例如-123 --> -321 
 ```python
 class Solution(object):
@@ -500,11 +445,13 @@ if __name__ == "__main__":
     postfix = ".pyc"
     func("K:\Python_script", postfix)
 ```
+
 ### 20.一行代码实现1-100之和
 ```python
 count = sum(range(0,101))
 print(count)
 ```
+
 ### 21.Python-遍历列表时删除元素的正确做法
 遍历在新在列表操作，删除时在原来的列表操作
 ```python
@@ -517,7 +464,6 @@ for i in a[:]:
     else:
         a.remove(i)
     print(a)
-print('-----------')
 print(id(a))
 
 ```
@@ -544,7 +490,6 @@ for i in range(len(a)-1,-1,-1):
     else:
         a.remove(a[i])
 print(id(a))
-print('-----------')
 print(a)
 ```
 ### 22.字符串的操作题目
@@ -627,6 +572,7 @@ G: global 全局作用域
 B： build-in 内置作用
 
 python在函数里面的查找分为4种，称之为LEGB，也正是按照这是顺序来查找的
+
 ### 28.字符串 `"123"` 转换成 `123`，不使用内置api，例如 `int()`
 方法一： 利用 `str` 函数
 ```python
@@ -662,8 +608,10 @@ from functools import reduce
 def atoi(s):
     return reduce(lambda num, v: num * 10 + ord(v) - ord('0'), s, 0)
 ```
-### 29.Given an array of integers
-给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。示例:给定`nums = [2, 7, 11, 15]`, `target=9` 因为 `nums[0] + nums[1] = 2 + 7 = 9`,所以返回 `[0, 1]`
+### 29.给定一个整数数组和一个目标值，找出数组中和为目标值的两个数
+给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。
+
+示例:给定`nums = [2, 7, 11, 15]`, `target=9` 因为 `nums[0] + nums[1] = 2 + 7 = 9`,所以返回 `[0, 1]`
 ```python
 from typing import List
 
@@ -1294,14 +1242,9 @@ def multipliers():
 
 ```
 
-
-
-
-
 ### 78.什么是lambda函数？它有什么好处？写一个匿名函数求两个数的和
 
 lambda函数是匿名函数，使用lambda函数能创建小型匿名函数，这种函数得名于省略了用def声明函数的标准步骤
-
 
 ##  设计模式
 ### 79.对设计模式的理解，简述你了解的设计模式？
@@ -1316,6 +1259,7 @@ https://www.cnblogs.com/huchong/p/8244279.html#navigator
 ```python
 print([x*x for x in range(1, 11)])
 ```
+
 ### 83.对装饰器的理解，并写出一个计时器记录方法执行性能的装饰器？
 装饰器本质上是一个callable object ，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
 
