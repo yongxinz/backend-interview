@@ -2,7 +2,6 @@
 
 - [Redis](#redis)
   - [1.Redis是什么？](#1redis%e6%98%af%e4%bb%80%e4%b9%88)
-  - [2.Redis数据库](#2redis%e6%95%b0%e6%8d%ae%e5%ba%93)
   - [3.Redis缺点](#3redis%e7%bc%ba%e7%82%b9)
   - [4.Redis宕机怎么解决?](#4redis%e5%ae%95%e6%9c%ba%e6%80%8e%e4%b9%88%e8%a7%a3%e5%86%b3)
   - [5.redis和mecached的区别，以及使用场景](#5redis%e5%92%8cmecached%e7%9a%84%e5%8c%ba%e5%88%ab%e4%bb%a5%e5%8f%8a%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af)
@@ -16,8 +15,6 @@
 
 1. 是一个完全开源免费的key-value内存数据库 
 2. 通常被认为是一个数据结构服务器，主要是因为其有着丰富的数据结构 strings、hash、list、sets、sorted sets
-
-### 2.Redis数据库
 
 通常局限点来说，Redis也以消息队列的形式存在，作为内嵌的List存在，满足实时的高并发需求。在使用缓存的时候，redis比memcached具有更多的优势，并且支持更多的数据类型，把redis当作一个中间存储系统，用来处理高并发的数据库操作。
 
@@ -42,7 +39,7 @@
 
 slave从redis宕机，配置主从复制的时候才配置从的redis，从的会从主的redis中读取主的redis的操作日志，在redis中从库重新启动后会自动加入到主从架构中，自动完成同步数据;
 
-2, 如果从数据库实现了持久化，此时千万不要立马重启服务，否则可能会造成数据丢失，正确的操作如下：在slave数据上执行SLAVEOF ON ONE,来断开主从关系并把slave升级为主库，此时重新启动主数据库，执行SLAVEOF，把它设置为从库，连接到主的redis上面做主从复制，自动备份数据。
+如果从数据库实现了持久化，此时千万不要立马重启服务，否则可能会造成数据丢失，正确的操作如下：在slave数据上执行SLAVEOF ON ONE,来断开主从关系并把slave升级为主库，此时重新启动主数据库，执行SLAVEOF，把它设置为从库，连接到主的redis上面做主从复制，自动备份数据。
 
 以上过程很容易配置错误，可以使用redis提供的哨兵机制来简化上面的操作。简单的方法:redis的哨兵(sentinel)的功能
 
