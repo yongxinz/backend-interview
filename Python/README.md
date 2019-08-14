@@ -2,6 +2,19 @@
 
 - [Python精选](#Python精选)
     - [必备知识](必备知识)
+        - [1.Python的函数参数传递](#1python%e7%9a%84%e5%87%bd%e6%95%b0%e5%8f%82%e6%95%b0%e4%bc%a0%e9%80%92)
+        - [2.Python中的元类(metaclass)](#2python%e4%b8%ad%e7%9a%84%e5%85%83%e7%b1%bbmetaclass)
+        - [3.@staticmethod和@classmethod](#3@staticmethod和@classmethod)
+        - [4.类变量和实例变量](#4类变量和实例变量)
+        - [5.Python自省](#5python%e8%87%aa%e7%9c%81)
+        - [6.字典推导式](#6字典推导式)
+        - [7.Python中单下划线和双下划线](#7python%e4%b8%ad%e5%8d%95%e4%b8%8b%e5%88%92%e7%ba%bf%e5%92%8c%e5%8f%8c%e4%b8%8b%e5%88%92%e7%ba%bf)
+        - [8.字符串格式化:%和.format](#8%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%a0%bc%e5%bc%8f%e5%8c%96%e5%92%8cformat)
+        - [9.迭代器和生成器](#9%e8%bf%ad%e4%bb%a3%e5%99%a8%e5%92%8c%e7%94%9f%e6%88%90%e5%99%a8)
+        - [10.`*args` 和 `**kwargs`](#10args-%e5%92%8c-kwargs)
+        - [11.面向切面编程AOP和装饰器](#11%e9%9d%a2%e5%90%91%e5%88%87%e9%9d%a2%e7%bc%96%e7%a8%8baop%e5%92%8c%e8%a3%85%e9%a5%b0%e5%99%a8)
+        - [12.鸭子类型](#12%e9%b8%ad%e5%ad%90%e7%b1%bb%e5%9e%8b)
+        - [Python中重载](#13python%e4%b8%ad%e9%87%8d%e8%bd%bd)
 - [Python基础](#python基础)
     - [文件操作](#文件操作)
         - [1.有一个jsonline格式的文件file.txt大小约为10K](#1有一个jsonline格式的文件filetxt大小约为10k)
@@ -228,7 +241,7 @@ print a  # 1
 
 注：具体的值在不同电脑上运行时可能不同。
 
-可以看到，在执行完`a = 2`之后，`a`引用中保存的值，即内存地址发生变化，由原来`1`对象的所在的地址变成了`2`这个实体对象的内存地址。
+可以看到，在执行完`a = 2`之后，`a`引用中保存的值，即内存地址发生变化，由原来`1`对象的所在地址变成了`2`这个实体对象的内存地址。
 
 而第2个例子`a`引用保存的内存值就不会发生变化：
 
@@ -275,9 +288,9 @@ class A(object):
 a=A()
 ```
 
-这里先理解下函数参数里面的self和cls。这个self和cls是对类或者实例的绑定，对于一般的函数来说我们可以这么调用`foo(x)`，这个函数就是最常用的，它的工作跟任何东西(类,实例)无关。对于实例方法，我们知道在类里每次定义方法的时候都需要绑定这个实例，就是`foo(self, x)`，为什么要这么做呢?因为实例方法的调用离不开实例，我们需要把实例自己传给函数，调用的时候是这样的`a.foo(x)`(其实是`foo(a, x)`)。类方法一样,只不过它传递的是类而不是实例，`A.class_foo(x)`。注意这里的self和cls可以替换别的参数，但是python的约定是这俩，还是不要改的好。
+这里先理解下函数参数里面的self和cls。这个self和cls是对类或者实例的绑定，对于一般的函数来说我们可以这么调用`foo(x)`，这个函数就是最常用的，它的工作跟任何东西(类,实例)无关。对于实例方法，我们知道在类里每次定义方法的时候都需要绑定这个实例，就是`foo(self, x)`，为什么要这么做呢？因为实例方法的调用离不开实例，我们需要把实例自己传给函数，调用的时候是这样的`a.foo(x)`(其实是`foo(a, x)`)。类方法一样,只不过它传递的是类而不是实例，`A.class_foo(x)`。注意这里的self和cls可以替换别的参数，但是python的约定是这俩，还是不要改的好。
 
-对于静态方法其实和普通的方法一样,不需要对谁进行绑定,唯一的区别是调用的时候需要使用`a.static_foo(x)`或者`A.static_foo(x)`来调用.
+对于静态方法其实和普通的方法一样，不需要对谁进行绑定，唯一的区别是调用的时候需要使用 `a.static_foo(x)` 或者 `A.static_foo(x)` 来调用。
 
 | \\      | 实例方法 | 类方法         | 静态方法        |
 | :------ | :------- | :------------- | :-------------- |
@@ -293,11 +306,11 @@ a=A()
 
 **类变量：**
 
-> ​	是可在类的所有实例之间共享的值（也就是说，它们不是单独分配给每个实例的）。例如下例中，num_of_instance 就是类变量，用于跟踪存在着多少个Test 的实例。
+是可在类的所有实例之间共享的值（也就是说，它们不是单独分配给每个实例的）。例如下例中，num_of_instance 就是类变量，用于跟踪存在着多少个 Test 的实例。
 
 **实例变量：**
 
-> 实例化之后，每个实例单独拥有的变量。
+实例化之后，每个实例单独拥有的变量。
 
 ```python
 class Test(object):  
@@ -315,7 +328,7 @@ if __name__ == '__main__':
     print t2.name , t2.num_of_instance  # lucy 2
 ```
 
-> 补充的例子
+补充的例子：
 
 ```python
 class Person:
@@ -329,7 +342,7 @@ print p2.name  # aaa
 print Person.name  # aaa
 ```
 
-这里`p1.name="bbb"`是实例调用了类变量，这其实和上面第一个问题一样，就是函数传参的问题,`p1.name`一开始是指向的类变量`name="aaa"`，但是在实例的作用域里把类变量的引用改变了，就变成了一个实例变量，self.name不再引用Person的类变量name了。
+这里`p1.name="bbb"`是实例调用了类变量，这其实和上面第一个问题一样，就是函数传参的问题，`p1.name` 一开始是指向的类变量`name="aaa"`，但是在实例的作用域里把类变量的引用改变了，就变成了一个实例变量，`self.name` 不再引用Person的类变量name了。
 
 可以看看下面的例子:
 
@@ -363,7 +376,7 @@ print isinstance(a,list)  # True
 
 ### 6.字典推导式
 
-可能你见过列表推导时,却没有见过字典推导式,在2.7中才加入的:
+可能你见过列表推导式，却没有见过字典推导式，在2.7中才加入的：
 
 ```python
 d = {key: value for (key, value) in iterable}
@@ -388,11 +401,11 @@ AttributeError: myClass instance has no attribute '__superprivate'
 {'_MyClass__superprivate': 'Hello', '_semiprivate': ', world!'}
 ```
 
-`__foo__`:一种约定,Python内部的名字,用来区别其他用户自定义的命名,以防冲突，就是例如`__init__()`,`__del__()`,`__call__()`这些特殊方法
+`__foo__`：一种约定，Python内部的名字，用来区别其他用户自定义的命名，以防冲突，就是例如：`__init__()`，`__del__()`，`__call__()` 这些特殊方法；
 
-`_foo`:一种约定,用来指定变量私有.程序员用来指定私有变量的一种方式.不能用from module import * 导入，其他方面和公有一样访问；
+`_foo`：一种约定，用来指定变量私有，程序员用来指定私有变量的一种方式。不能用 `from module import *` 导入，其他方面和公有一样访问；
 
-`__foo`:这个有真正的意义:解析器用`_classname__foo`来代替这个名字,以区别和其他类相同的命名,它无法直接像公有成员一样随便访问,通过对象名._类名__xxx这样的方式可以访问.
+`__foo`：这个有真正的意义：解析器用 `_classname__foo` 来代替这个名字，以区别和其他类相同的命名，它无法直接像公有成员一样随便访问，通过 `对象名._类名__xxx` 这样的方式可以访问。
 
 详情见:http://stackoverflow.com/questions/1301346/the-meaning-of-a-single-and-a-double-underscore-before-an-object-name-in-python
 
@@ -400,24 +413,21 @@ AttributeError: myClass instance has no attribute '__superprivate'
 
 ### 8.字符串格式化:%和.format
 
-.format在许多方面看起来更便利.对于`%`最烦人的是它无法同时传递一个变量和元组.你可能会想下面的代码不会有什么问题:
+`.format` 在许多方面看起来更便利。对于 `%` 最烦人的是它无法同时传递一个变量和元组。你可能会想下面的代码不会有什么问题:
 
-```
+```python
 "hi there %s" % name
 ```
 
-但是,如果name恰好是(1,2,3),它将会抛出一个TypeError异常.为了保证它总是正确的,你必须这样做:
+但是，如果name恰好是(1,2,3)，它将会抛出一个 TypeError 异常。为了保证它总是正确的，你必须这样做：
 
-```
+```python
 "hi there %s" % (name,)   # 提供一个单元素的数组而不是一个参数
 ```
 
-但是有点丑..format就没有这些问题.你给的第二个问题也是这样,.format好看多了.
+`.format` 就没有这些问题。
 
-你为什么不用它?
-
-- 不知道它(在读这个之前)
-- 为了和Python2.5兼容(譬如logging库建议使用`%`([issue #4](https://github.com/taizilongxu/interview_python/issues/4)))
+为了和Python2.5兼容(譬如logging库建议使用`%`([issue #4](https://github.com/taizilongxu/interview_python/issues/4)))
 
 http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
 
@@ -428,8 +438,8 @@ http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
 这是中文版: http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/1/README.html
 
 这里有个关于生成器的创建问题面试官有考：
-问：  将列表生成式中[]改成() 之后数据结构是否改变？ 
-答案：是，从列表变为生成器
+问：将列表生成式中 `[]` 改成 `()` 之后数据结构是否改变？ 
+答案：是，从列表变为生成器。
 
 ```python
 >>> L = [x*x for x in range(10)]
@@ -442,7 +452,7 @@ http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
 
 通过列表生成式，可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含百万元素的列表，不仅是占用很大的内存空间，如：我们只需要访问前面的几个元素，后面大部分元素所占的空间都是浪费的。因此，没有必要创建完整的列表（节省大量内存空间）。在Python中，我们可以采用生成器：边循环，边计算的机制—>generator
 
-### 10.`*args` and `**kwargs`
+### 10.`*args` 和 `**kwargs`
 
 用`*args`和`**kwargs`只是为了方便并没有强制使用它们.
 
@@ -454,9 +464,9 @@ http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
 ...         print '{0}. {1}'.format(count, thing)
 ...
 >>> print_everything('apple', 'banana', 'cabbage')
-0. apple
-1. banana
-2. cabbage
+1. apple
+2. banana
+3. cabbage
 ```
 
 相似的,`**kwargs`允许你使用没有事先定义的参数名:
@@ -473,7 +483,7 @@ apple = fruit
 
 你也可以混着用.命名参数首先获得参数值然后所有的其他参数都传递给`*args`和`**kwargs`.命名参数在列表的最前端.例如:
 
-```
+```python
 def table_things(titlestring, **kwargs)
 ```
 
@@ -491,7 +501,7 @@ def table_things(titlestring, **kwargs)
 a = aardvark, b = baboon, c = cat
 ```
 
-就像你看到的一样,它可以传递列表(或者元组)的每一项并把它们解包.注意必须与它们在函数里的参数相吻合.当然,你也可以在函数定义或者函数调用时用*.
+就像你看到的一样,它可以传递列表(或者元组)的每一项并把它们解包.注意必须与它们在函数里的参数相吻合.当然,你也可以在函数定义或者函数调用时用 `*`.
 
 http://stackoverflow.com/questions/3394835/args-and-kwargs
 
@@ -499,7 +509,9 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 这个AOP一听起来有点懵,同学面阿里的时候就被问懵了...
 
-装饰器是一个很著名的设计模式，经常被用于有切面需求的场景，较为经典的有插入日志、性能测试、事务处理等。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量函数中与函数功能本身无关的雷同代码并继续重用。概括的讲，**装饰器的作用就是为已经存在的对象添加额外的功能。**
+装饰器是一个很著名的设计模式，经常被用于有切面需求的场景，较为经典的有插入日志、性能测试、事务处理等。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量函数中与函数功能本身无关的雷同代码并继续重用。
+
+概括的讲，**装饰器的作用就是为已经存在的对象添加额外的功能。**
 
 这个问题比较大,推荐: http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python
 
@@ -528,11 +540,11 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 另外，一个基本的设计原则是，仅仅当两个函数除了参数类型和参数个数不同以外，其功能是完全相同的，此时才使用函数重载，如果两个函数的功能其实不同，那么不应当使用重载，而应当使用一个名字不同的函数。
 
-好吧，那么对于情况 1 ，函数功能相同，但是参数类型不同，python 如何处理？答案是根本不需要处理，因为 python 可以接受任何类型的参数，如果函数的功能相同，那么不同的参数类型在 python 中很可能是相同的代码，没有必要做成两个不同函数。
+好吧，那么对于情况 1，函数功能相同，但是参数类型不同，python 如何处理？答案是根本不需要处理，因为 python 可以接受任何类型的参数，如果函数的功能相同，那么不同的参数类型在 python 中很可能是相同的代码，没有必要做成两个不同函数。
 
-那么对于情况 2 ，函数功能相同，但参数个数不同，python 如何处理？大家知道，答案就是缺省参数。对那些缺少的参数设定为缺省参数即可解决问题。因为你假设函数功能相同，那么那些缺少的参数终归是需要用的。
+那么对于情况 2，函数功能相同，但参数个数不同，python 如何处理？大家知道，答案就是缺省参数。对那些缺少的参数设定为缺省参数即可解决问题。因为你假设函数功能相同，那么那些缺少的参数终归是需要用的。
 
-好了，鉴于情况 1 跟 情况 2 都有了解决方案，python 自然就不需要函数重载了。
+好了，鉴于情况 1 跟情况 2 都有了解决方案，python 自然就不需要函数重载了。
 
 ### 14.新式类和旧式类
 
