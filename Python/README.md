@@ -14,7 +14,7 @@
         - [10.`*args` 和 `**kwargs`](#10args-%e5%92%8c-kwargs)
         - [11.面向切面编程AOP和装饰器](#11%e9%9d%a2%e5%90%91%e5%88%87%e9%9d%a2%e7%bc%96%e7%a8%8baop%e5%92%8c%e8%a3%85%e9%a5%b0%e5%99%a8)
         - [12.鸭子类型](#12%e9%b8%ad%e5%ad%90%e7%b1%bb%e5%9e%8b)
-        - [Python中重载](#13python%e4%b8%ad%e9%87%8d%e8%bd%bd)
+        - [13.Python中重载](#13python%e4%b8%ad%e9%87%8d%e8%bd%bd)
 - [Python基础](#python基础)
     - [文件操作](#文件操作)
         - [1.有一个jsonline格式的文件file.txt大小约为10K](#1有一个jsonline格式的文件filetxt大小约为10k)
