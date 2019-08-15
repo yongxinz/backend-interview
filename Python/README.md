@@ -15,16 +15,32 @@
         - [11.面向切面编程AOP和装饰器](#11%e9%9d%a2%e5%90%91%e5%88%87%e9%9d%a2%e7%bc%96%e7%a8%8baop%e5%92%8c%e8%a3%85%e9%a5%b0%e5%99%a8)
         - [12.鸭子类型](#12%e9%b8%ad%e5%ad%90%e7%b1%bb%e5%9e%8b)
         - [13.Python中重载](#13python%e4%b8%ad%e9%87%8d%e8%bd%bd)
+        - [14.新式类和旧式类](#14%e6%96%b0%e5%bc%8f%e7%b1%bb%e5%92%8c%e6%97%a7%e5%bc%8f%e7%b1%bb)
+        - [15.`__new__`和`__init__`的区别](#15new%e5%92%8cinit%e7%9a%84%e5%8c%ba%e5%88%ab)
+        - [16.单例模式](#16%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f)
+        - [17.Python中的作用域](#17python%e4%b8%ad%e7%9a%84%e4%bd%9c%e7%94%a8%e5%9f%9f)
+        - [18.GIL线程全局锁](#18gil%e7%ba%bf%e7%a8%8b%e5%85%a8%e5%b1%80%e9%94%81)
+        - [19.协程](#19%e5%8d%8f%e7%a8%8b)
+        - [20.闭包](#20%e9%97%ad%e5%8c%85)
+        - [21.lambda函数](#21lambda%e5%87%bd%e6%95%b0)
+        - [22.Python函数式编程](#22python%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b)
+        - [23.Python里的拷贝](#23python%e9%87%8c%e7%9a%84%e6%8b%b7%e8%b4%9d)
+        - [24.Python垃圾回收机制](#24python%e5%9e%83%e5%9c%be%e5%9b%9e%e6%94%b6%e6%9c%ba%e5%88%b6)
+        - [25.Python的List](#25python%e7%9a%84list)
+        - [26.Python的is](#26python%e7%9a%84is)
+        - [27.read,readline和readlines](#27readreadline%e5%92%8creadlines)
+        - [28.Python2和3的区别](#28python2%e5%92%8c3%e7%9a%84%e5%8c%ba%e5%88%ab)
+        - [29.super init](#29super-init)
+        - [30.range and xrange](#30range-and-xrange)
 - [Python基础](#python基础)
     - [文件操作](#文件操作)
-        - [1.有一个jsonline格式的文件file.txt大小约为10K](#1有一个jsonline格式的文件filetxt大小约为10k)
-        - [2.补充缺失的代码](#2补充缺失的代码)
+        - [31.Python 处理文件](#31python-%e5%a4%84%e7%90%86%e6%96%87%e4%bb%b6)
+        - [32.遍历文件夹](#32%e9%81%8d%e5%8e%86%e6%96%87%e4%bb%b6%e5%a4%b9)
     - [模块与包](#模块与包)
-        - [3.输入日期， 判断这一天是这一年的第几天？](#3输入日期-判断这一天是这一年的第几天)
-        - [4.打乱一个排好序的list对象alist？](#4打乱一个排好序的list对象alist)
+        - [33.输入日期，判断这一天是这一年的第几天？](#33%e8%be%93%e5%85%a5%e6%97%a5%e6%9c%9f%e5%88%a4%e6%96%ad%e8%bf%99%e4%b8%80%e5%a4%a9%e6%98%af%e8%bf%99%e4%b8%80%e5%b9%b4%e7%9a%84%e7%ac%ac%e5%87%a0%e5%a4%a9)
+        - [34.打乱一个排好序的list对象](#34%e6%89%93%e4%b9%b1%e4%b8%80%e4%b8%aa%e6%8e%92%e5%a5%bd%e5%ba%8f%e7%9a%84list%e5%af%b9%e8%b1%a1)
     - [数据类型](#数据类型)
-        - [5.现有字典 d= {'a':24,'g':52,'i':12,'k':33}请按value值进行排序?](#5现有字典-d-a24g52i12k33请按value值进行排序)
-        - [6.字典推导式](#6字典推导式)
+        - [35.将字典按value值进行排序](#35%e5%b0%86%e5%ad%97%e5%85%b8%e6%8c%89value%e5%80%bc%e8%bf%9b%e8%a1%8c%e6%8e%92%e5%ba%8f)
         - [7.请反转字符串 "aStr"?](#7请反转字符串-astr)
         - [8.将字符串 "k:1 |k1:2|k2:3|k3:4"，处理成字典 {k:1,k1:2,...}](#8将字符串-k1-k12k23k34处理成字典-k1k12)
         - [9.请按alist中元素的age由大到小排序](#9请按alist中元素的age由大到小排序)
@@ -548,13 +564,15 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 ### 14.新式类和旧式类
 
-这个面试官问了,我说了老半天,不知道他问的真正意图是什么.
+这个面试官问了，我说了老半天，不知道他问的真正意图是什么。
 
 [stackoverflow](http://stackoverflow.com/questions/54867/what-is-the-difference-between-old-style-and-new-style-classes-in-python)
 
 这篇文章很好的介绍了新式类的特性: http://www.cnblogs.com/btchenguang/archive/2012/09/17/2689146.html
 
-新式类很早在2.2就出现了,所以旧式类完全是兼容的问题,Python3里的类全部都是新式类.这里有一个MRO问题可以了解下(新式类继承是根据C3算法,旧式类是深度优先),<Python核心编程>里讲的也很多.
+新式类很早在2.2就出现了，所以旧式类完全是兼容的问题，Python3 里的类全部都是新式类。
+
+这里有一个 MRO 问题可以了解下(新式类继承是根据C3算法，旧式类是深度优先)，<Python核心编程>里讲的也很多。
 
 > 一个旧式类的深度优先的例子
 
@@ -650,7 +668,6 @@ class MyClass:
 作为python的模块是天然的单例模式
 
 ```python
-# mysingleton.py
 class My_Singleton(object):
     def foo(self):
         pass
@@ -661,22 +678,21 @@ my_singleton = My_Singleton()
 from mysingleton import my_singleton
 
 my_singleton.foo()
-
 ```
 
 **[单例模式伯乐在线详细解释](http://python.jobbole.com/87294/)**
 
 ### 17.Python中的作用域
 
-函数作用域的LEGB顺序
+函数作用域的 LEGB 顺序：
 
-L： local 函数内部作用域
+L：local 函数内部作用域
 
-E: enclosing 函数内部与内嵌函数之间
+E：enclosing 函数内部与内嵌函数之间
 
-G: global 全局作用域
+G：global 全局作用域
 
-B： build-in 内置作用
+B：build-in 内置作用域
 
 Python 中，一个变量的作用域总是由在代码中被赋值的地方所决定的。
 
@@ -704,7 +720,7 @@ Python里最常见的yield就是协程的思想!可以查看第九个问题.
 
 闭包(closure)是函数式编程的重要的语法结构。闭包也是一种组织代码的结构，它同样提高了代码的可重复使用性。
 
-当一个内嵌函数引用其外部作作用域的变量,我们就会得到一个闭包. 总结一下,创建一个闭包必须满足以下几点:
+当一个内嵌函数引用其外部作用域的变量,我们就会得到一个闭包. 总结一下,创建一个闭包必须满足以下几点:
 
 1. 必须有一个内嵌函数
 2. 内嵌函数必须引用外部函数中的变量
@@ -783,7 +799,7 @@ d =  [1, 2, 3, 4, ['a', 'b']]
 
 ### 24.Python垃圾回收机制
 
-Python GC主要使用引用计数（reference counting）来跟踪和回收垃圾。在引用计数的基础上，通过“标记-清除”（mark and sweep）解决容器对象可能产生的循环引用问题，通过“分代回收”（generation collection）以空间换时间的方法提高垃圾回收效率。
+Python GC 主要使用引用计数（reference counting）来跟踪和回收垃圾。在引用计数的基础上，通过“标记-清除”（mark and sweep）解决容器对象可能产生的循环引用问题，通过“分代回收”（generation collection）以空间换时间的方法提高垃圾回收效率。
 
 #### 1 引用计数
 
@@ -852,8 +868,13 @@ What is the difference between range and xrange functions in Python 2.X?
 http://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x
 
 # Python基础
+
 ## 文件操作
-### 1.有一个jsonline格式的文件file.txt大小约为10K
+
+### 31.Python 处理文件
+
+有一个 jsonline 格式的文件 file.txt 大小约为 10K，很简单，直接读取处理就可以了。
+
 ```python
 def get_lines():
     with open('file.txt','rb') as f:
@@ -863,17 +884,22 @@ if __name__ == '__main__':
     for e in get_lines():
         process(e) # 处理每一行数据
 ```
+
 现在要处理一个大小为10G的文件，但是内存只有4G，如果在只修改 `get_lines` 函数而其他代码保持不变的情况下，应该如何实现？需要考虑的问题都有那些？
+
+生成器方式：
+
 ```python
 def get_lines():
     with open('file.txt','rb') as f:
         for i in f:
             yield i
 ```
-Pandaaaa906提供的方法
+
+分块读取方式：
+
 ```python
 from mmap import mmap
-
 
 def get_lines(fp):
     with open(fp,"r+") as f:
@@ -888,29 +914,36 @@ if __name__=="__main__":
     for i in get_lines("fp_some_huge_file"):
         print(i)
 ```
+
 要考虑的问题有：内存只有4G无法一次性读入10G文件，需要分批读入分批读入数据要记录每次读入数据的位置。分批每次读取数据的大小，太小会在读取操作花费过多时间。
 https://stackoverflow.com/questions/30294146/python-fastest-way-to-process-large-file
 
-###  2.补充缺失的代码
+### 32.遍历文件夹
+
 ```python
-def print_directory_contents(sPath):
-"""
-这个函数接收文件夹的名称作为输入参数
-返回该文件夹中文件的路径
-以及其包含文件夹中文件的路径
-"""
 import os
-for s_child in os.listdir(s_path):
-    s_child_path = os.path.join(s_path, s_child)
-    if os.path.isdir(s_child_path):
-        print_directory_contents(s_child_path)
-    else:
-        print(s_child_path)
+
+def print_directory_contents(sPath):
+    """
+    这个函数接收文件夹的名称作为输入参数
+    返回该文件夹中文件的路径
+    以及其包含文件夹中文件的路径
+    """
+    for s_child in os.listdir(s_path):
+        s_child_path = os.path.join(s_path, s_child)
+        if os.path.isdir(s_child_path):
+            print_directory_contents(s_child_path)
+        else:
+            print(s_child_path)
 ```
+
 ## 模块与包
-### 3.输入日期， 判断这一天是这一年的第几天？
+
+### 33.输入日期，判断这一天是这一年的第几天？
+
 ```python
 import datetime
+
 def dayofyear():
     year = input("请输入年份: ")
     month = input("请输入月份: ")
@@ -919,23 +952,27 @@ def dayofyear():
     date2 = datetime.date(year=int(year),month=1,day=1)
     return (date1-date2).days+1
 ```
-### 4.打乱一个排好序的list对象alist？
+
+### 34.打乱一个排好序的list对象
+
 ```python
 import random
+
 alist = [1,2,3,4,5]
 random.shuffle(alist)
 print(alist)
 ```
+
 ## 数据类型
-### 5.现有字典 d= {'a':24,'g':52,'i':12,'k':33}请按value值进行排序?
+
+### 35.将字典按value值进行排序
+
 ```python
-sorted(d.items(),key=lambda x:x[1])
+sorted(d.items(), key=lambda x:x[1])
 ```
-### 6.字典推导式
-```python
-d = {key:value for (key,value) in iterable}
-```
-### 7.请反转字符串 "aStr"?
+
+### 7.请反转字符串 "aStr"
+
 ```python
 print("aStr"[::-1])
 ```
