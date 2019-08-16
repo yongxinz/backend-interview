@@ -41,10 +41,11 @@
         - [34.打乱一个排好序的list对象](#34%e6%89%93%e4%b9%b1%e4%b8%80%e4%b8%aa%e6%8e%92%e5%a5%bd%e5%ba%8f%e7%9a%84list%e5%af%b9%e8%b1%a1)
     - [数据类型](#数据类型)
         - [35.将字典按value值进行排序](#35%e5%b0%86%e5%ad%97%e5%85%b8%e6%8c%89value%e5%80%bc%e8%bf%9b%e8%a1%8c%e6%8e%92%e5%ba%8f)
-        - [7.请反转字符串 "aStr"?](#7请反转字符串-astr)
-        - [8.将字符串 "k:1 |k1:2|k2:3|k3:4"，处理成字典 {k:1,k1:2,...}](#8将字符串-k1-k12k23k34处理成字典-k1k12)
-        - [9.请按alist中元素的age由大到小排序](#9请按alist中元素的age由大到小排序)
-        - [10.下面代码的输出结果将是什么？](#10下面代码的输出结果将是什么)
+        - [36.请反转字符串 "aStr"](#36%e8%af%b7%e5%8f%8d%e8%bd%ac%e5%ad%97%e7%ac%a6%e4%b8%b2-%22astr%22)
+        - [37.将字符串 "k:1|k1:2|k2:3|k3:4" 处理成字典 {k:1,k1:2,...}](#37%e5%b0%86%e5%ad%97%e7%ac%a6%e4%b8%b2-%22k1k12k23k34%22-%e5%a4%84%e7%90%86%e6%88%90%e5%ad%97%e5%85%b8-k1k12)
+        - [38.列表切片](#38%e5%88%97%e8%a1%a8%e5%88%87%e7%89%87)
+        - [39.写一个列表生成式，产生一个公差为11的等差数列](#39%e5%86%99%e4%b8%80%e4%b8%aa%e5%88%97%e8%a1%a8%e7%94%9f%e6%88%90%e5%bc%8f%e4%ba%a7%e7%94%9f%e4%b8%80%e4%b8%aa%e5%85%ac%e5%b7%ae%e4%b8%ba11%e7%9a%84%e7%ad%89%e5%b7%ae%e6%95%b0%e5%88%97)
+        - [40.给定两个列表，找出他们相同的元素和不同的元素](#40%e7%bb%99%e5%ae%9a%e4%b8%a4%e4%b8%aa%e5%88%97%e8%a1%a8%e6%89%be%e5%87%ba%e4%bb%96%e4%bb%ac%e7%9b%b8%e5%90%8c%e7%9a%84%e5%85%83%e7%b4%a0%e5%92%8c%e4%b8%8d%e5%90%8c%e7%9a%84%e5%85%83%e7%b4%a0)
         - [11.写一个列表生成式，产生一个公差为11的等差数列](#11写一个列表生成式产生一个公差为11的等差数列)
         - [12.给定两个列表，怎么找出他们相同的元素和不同的元素？](#12给定两个列表怎么找出他们相同的元素和不同的元素)
         - [13.请写出一段python代码实现删除list里面的重复元素？](#13请写出一段python代码实现删除list里面的重复元素)
@@ -971,80 +972,59 @@ print(alist)
 sorted(d.items(), key=lambda x:x[1])
 ```
 
-### 7.请反转字符串 "aStr"
+### 36.请反转字符串 "aStr"
 
 ```python
 print("aStr"[::-1])
 ```
 
-### 8.将字符串 "k:1|k1:2|k2:3|k3:4"，处理成字典 {k:1,k1:2,...}
+### 37.将字符串 "k:1|k1:2|k2:3|k3:4" 处理成字典 {k:1,k1:2,...}
+
 ```python
 str1 = "k:1|k1:2|k2:3|k3:4"
+
 def str2dict(str1):
     dict1 = {}
     for iterms in str1.split('|'):
-        key,value = iterms.split(':')
+        key, value = iterms.split(':')
         dict1[key] = value
     return dict1
-#字典推导式
+```
+
+或者直接用字典推导式：
+
+```python
 d = {k:int(v) for t in str1.split("|") for k, v in (t.split(":"), )}
 ```
 
-### 9.请按alist中元素的age由大到小排序
-```python
-alist = [{'name':'a','age':20},{'name':'b','age':30},{'name':'c','age':25}]
-def sort_by_age(list1):
-    return sorted(alist,key=lambda x:x['age'],reverse=True)
-```
+### 38.列表切片
 
-### 10.下面代码的输出结果将是什么？
 ```python
 list = ['a','b','c','d','e']
 print(list[10:])
 ```
-代码将输出 `[]`,不会产生IndexError错误，就像所期望的那样，尝试用超出成员的个数的index来获取某个列表的成员。例如，尝试获取list[10]和之后的成员，会导致IndexError。然而，尝试获取列表的切片，开始的index超过了成员个数不会产生IndexError，而是仅仅返回一个空列表。这成为特别让人恶心的疑难杂症，因为运行的时候没有错误产生，导致Bug很难被追踪到。
 
-### 11.写一个列表生成式，产生一个公差为11的等差数列
+代码将输出 `[]`，不会产生IndexError错误，就像所期望的那样，尝试用超出成员的个数的index来获取某个列表的成员。例如，尝试获取list[10]和之后的成员，会导致IndexError。
+
+然而，尝试获取列表的切片，开始的index超过了成员个数不会产生IndexError，而是仅仅返回一个空列表。这成为特别让人恶心的疑难杂症，因为运行的时候没有错误产生，导致Bug很难被追踪到。
+
+### 39.写一个列表生成式，产生一个公差为11的等差数列
+
 ```python
 print([x*11 for x in range(10)])
 ```
 
-### 12.给定两个列表，怎么找出他们相同的元素和不同的元素？
+### 40.给定两个列表，找出他们相同的元素和不同的元素
+
 ```python
 list1 = [1,2,3]
 list2 = [3,4,5]
+
 set1 = set(list1)
 set2 = set(list2)
+
 print(set1 & set2)
 print(set1 ^ set2)
-```
-### 13.请写出一段python代码实现删除list里面的重复元素？
-```python
-l1 = ['b','c','d','c','a','a']
-l2 = list(set(l1))
-print(l2)
-```
-用list类的sort方法:
-```python
-l1 = ['b','c','d','c','a','a']
-l2 = list(set(l1))
-l2.sort(key=l1.index)
-print(l2)
-```
-也可以这样写:
-```python
-l1 = ['b','c','d','c','a','a']
-l2 = sorted(set(l1),key=l1.index)
-print(l2)
-```
-也可以用遍历：
-```python
-l1 = ['b','c','d','c','a','a']
-l2 = []
-for i in l1:
-    if not i in l2:
-        l2.append(i)
-print(l2)
 ```
 
 ## 企业面试题
