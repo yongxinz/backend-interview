@@ -32,11 +32,12 @@
 <!-- /TOC -->
 
 ## 系统编程
+
 ### 1.select,poll和epoll
 
-其实所有的I/O都是轮询的方法,只不过实现的层面不同罢了.
+其实所有的I/O都是轮询的方法，只不过实现的层面不同罢了。
 
-这个问题可能有点深入了,但相信能回答出这个问题是对I/O多路复用有很好的了解了.其中tornado使用的就是epoll的.
+这个问题可能有点深入了，但相信能回答出这个问题是对I/O多路复用有很好的了解了，其中tornado使用的就是 epoll。
 
 [selec,poll和epoll区别总结](http://www.cnblogs.com/Anker/p/3265058.html)
 
@@ -46,9 +47,7 @@
 2. 查找配对速度慢
 3. 数据由内核拷贝到用户态
 
-poll改善了第一个缺点
-
-epoll改了三个缺点.
+poll改善了第一个缺点，epoll改了三个缺点。
 
 关于epoll的: http://www.cnblogs.com/my_life/articles/3968782.html
 
@@ -121,19 +120,17 @@ Bulid过程可以分解为4个步骤:预处理(Prepressing), 编译(Compilation)
 
 4、链接
 
-链接的主要内容就是把各个模块之间相互引用的部分处理好，使各个模块可以正确的拼接。
-链接的主要过程包块 地址和空间的分配（Address and Storage Allocation）、符号决议(Symbol Resolution)和重定位(Relocation)等步骤。
+链接的主要内容就是把各个模块之间相互引用的部分处理好，使各个模块可以正确的拼接。主要过程包块地址和空间的分配（Address and Storage Allocation）、符号决议(Symbol Resolution)和重定位(Relocation)等步骤。
 
 ### 5.静态链接和动态链接
 
-静态链接方法：静态链接的时候，载入代码就会把程序会用到的动态代码或动态代码的地址确定下来
-静态库的链接可以使用静态链接，动态链接库也可以使用这种方法链接导入库
+静态链接方法：静态链接的时候，载入代码就会把程序会用到的动态代码或动态代码的地址确定下来。静态库的链接可以使用静态链接，动态链接库也可以使用这种方法链接导入库。
 
-动态链接方法：使用这种方式的程序并不在一开始就完成动态链接，而是直到真正调用动态库代码时，载入程序才计算(被调用的那部分)动态代码的逻辑地址，然后等到某个时候，程序又需要调用另外某块动态代码时，载入程序又去计算这部分代码的逻辑地址，所以，这种方式使程序初始化时间较短，但运行期间的性能比不上静态链接的程序
+动态链接方法：使用这种方式的程序并不在一开始就完成动态链接，而是直到真正调用动态库代码时，载入程序才计算(被调用的那部分)动态代码的逻辑地址，然后等到某个时候，程序又需要调用另外某块动态代码时，载入程序又去计算这部分代码的逻辑地址，所以，这种方式使程序初始化时间较短，但运行期间的性能比不上静态链接的程序。
 
 ### 6.虚拟内存技术
 
-虚拟存储器是指具有请求调入功能和置换功能,能从逻辑上对内存容量加以扩充的一种存储系统.
+虚拟存储器是指具有请求调入功能和置换功能，能从逻辑上对内存容量加以扩充的一种存储系统.
 
 ### 7.分页和分段
 
@@ -156,7 +153,7 @@ Bulid过程可以分解为4个步骤:预处理(Prepressing), 编译(Compilation)
 
 ### 9.边沿触发和水平触发
 
-边缘触发是指每当状态变化时发生一个 io 事件，条件触发是只要满足条件就发生一个 io 事件
+边缘触发是指每当状态变化时发生一个 io 事件，条件触发是只要满足条件就发生一个 io 事件。
 
 ### 10.unix进程间通信方式(IPC)
 
@@ -168,30 +165,35 @@ Bulid过程可以分解为4个步骤:预处理(Prepressing), 编译(Compilation)
 6. 内存映射（mapped memory）：内存映射允许任何多个进程间通信，每一个使用该机制的进程通过把一个共享的文件映射到自己的进程地址空间来实现它。
 7. 信号量（semaphore）：主要作为进程间以及同一进程不同线程之间的同步手段。
 8. 套接口（Socket）：更为一般的进程间通信机制，可用于不同机器之间的进程间通信。起初是由Unix系统的BSD分支开发出来的，但现在一般可以移植到其它类Unix系统上：Linux和System V的变种都支持套接字。
+
 ### 11.进程总结
+
 进程：程序运行在操作系统上的一个实例，就称之为进程。进程需要相应的系统资源：内存、时间片、pid。
+
 创建进程：
-首先要导入multiprocessing中的Process：
-创建一个Process对象;
-创建Process对象时，可以传递参数;
+
+首先要导入 multiprocessing 中的 Process，然后创建一个 Process 对象，创建 Process 对象时，可以传递参数：
+
 ```python
-p = Process(target=XXX,args=(tuple,),kwargs={key:value})
-target = XXX 指定的任务函数，不用加(),
-args=(tuple,)kwargs={key:value}给任务函数传递的参数
+p = Process(target=XXX, args=(tuple,), kwargs={key: value})
+# target = XXX 指定的任务函数，不用加(),
+# args=(tuple,)kwargs={key:value}给任务函数传递的参数
 ```
-使用start()启动进程
-结束进程
-给子进程指定函数传递参数Demo
+
+使用start()启动进程：
+
 ```python
 import os
-from mulitprocessing import Process
 import time
+from mulitprocessing import Process
 
-def pro_func(name,age,**kwargs):
+
+def pro_func(name, age, **kwargs):
     for i in range(5):
         print("子进程正在运行中，name=%s,age=%d,pid=%d"%(name,age,os.getpid()))
         print(kwargs)
         time.sleep(0.2)
+
 if __name__ =="__main__":
     #创建Process对象
     p = Process(target=pro_func,args=('小明',18),kwargs={'m':20})
@@ -202,7 +204,8 @@ if __name__ =="__main__":
     p.terminate()
     p.join()
 ```
-注意：进程间不共享全局变量
+
+注意：进程间不共享全局变量。
 
 进程之间的通信-Queue
 
@@ -214,29 +217,35 @@ Queue.empty():如果队列为空，返回True，反之False
 
 Queue.full():如果队列满了，返回True,反之False
 
-Queue.get([block[,timeout]]):获取队列中的一条消息，然后将其从队列中移除，
+Queue.get([block[,timeout]]):获取队列中的一条消息，然后将其从队列中移除
 
 block默认值为True。
 
-如果block使用默认值，且没有设置timeout（单位秒),消息队列如果为空，此时程序将被阻塞（停在读中状态），直到消息队列读到消息为止，如果设置了timeout，则会等待timeout秒，若还没读取到任何消息，则抛出“Queue.Empty"异常：
+如果block使用默认值，且没有设置timeout（单位秒)，消息队列如果为空，此时程序将被阻塞（停在读中状态），直到消息队列读到消息为止，如果设置了timeout，则会等待timeout秒，若还没读取到任何消息，则抛出“Queue.Empty"异常：
 
 Queue.get_nowait()相当于Queue.get(False)
 
 Queue.put(item,[block[,timeout]]):将item消息写入队列，block默认值为True;
-如果block使用默认值，且没有设置timeout（单位秒），消息队列如果已经没有空间可写入，此时程序将被阻塞（停在写入状态），直到从消息队列腾出空间为止，如果设置了timeout，则会等待timeout秒，若还没空间，则抛出”Queue.Full"异常
-如果block值为False，消息队列如果没有空间可写入，则会立刻抛出"Queue.Full"异常;
+
+如果block使用默认值，且没有设置timeout（单位秒），消息队列如果已经没有空间可写入，此时程序将被阻塞（停在写入状态），直到从消息队列腾出空间为止，如果设置了timeout，则会等待timeout秒，若还没空间，则抛出”Queue.Full"异常；如果block值为False，消息队列如果没有空间可写入，则会立刻抛出"Queue.Full"异常;
+
 Queue.put_nowait(item):相当Queue.put(item,False)
 
 进程间通信Demo:
+
 ```python
+import os
+import time
+import random
 from multiprocessing import Process.Queue
-import os,time,random
+
 #写数据进程执行的代码：
 def write(q):
     for value in ['A','B','C']:
         print("Put %s to queue...",%value)
         q.put(value)
         time.sleep(random.random())
+
 #读数据进程执行的代码
 def read(q):
     while True:
@@ -246,6 +255,7 @@ def read(q):
             time.sleep(random.random())
         else:
             break
+
 if __name__=='__main__':
     #父进程创建Queue，并传给各个子进程
     q = Queue()
@@ -262,11 +272,16 @@ if __name__=='__main__':
     print('')
     print('所有数据都写入并且读完')
 ```
-    进程池Pool
+
+进程池Pool
+
 ```python
 #coding:utf-8
+
+import os
+import time
+import random
 from multiprocessing import Pool
-import os,time,random
 
 def worker(msg):
     t_start = time.time()
@@ -279,19 +294,25 @@ def worker(msg):
 po = Pool(3)#定义一个进程池，最大进程数3
 for i in range(0,10):
     po.apply_async(worker,(i,))
+
 print("---start----")
 po.close()
 po.join()
 print("----end----")
 ```
+
 进程池中使用Queue
 
-如果要使用Pool创建进程，就需要使用multiprocessing.Manager()中的Queue(),而不是multiprocessing.Queue(),否则会得到如下的错误信息：
+如果要使用Pool创建进程，就需要使用multiprocessing.Manager()中的Queue()，而不是multiprocessing.Queue()，否则会得到如下的错误信息：
 
 RuntimeError： Queue objects should only be shared between processs through inheritance
+
 ```python
-from multiprocessing import Manager,Pool
-import os,time,random
+import os
+import time
+import random
+from multiprocessing import Manager, Pool
+
 def reader(q):
     print("reader 启动(%s),父进程为（%s)"%(os.getpid(),os.getpid()))
     for i in range(q.qsize()):
@@ -301,6 +322,7 @@ def writer(q):
     print("writer 启动（%s),父进程为(%s)"%(os.getpid(),os.getpid()))
     for i ini "itcast":
         q.put(i)
+        
 if __name__ == "__main__":
     print("(%s)start"%os.getpid())
     q = Manager().Queue()#使用Manager中的Queue
@@ -312,6 +334,7 @@ if __name__ == "__main__":
     po.join()
     print("(%s)End"%os.getpid())
 ```
+
 ### 107.谈谈你对多进程，多线程，以及协程的理解，项目是否用？
 这个问题被问的概念相当之大，
 进程：一个运行的程序（代码）就是一个进程，没有运行的代码叫程序，进程是系统资源分配的最小单位，进程拥有自己独立的内存空间，所有进程间数据不共享，开销大。
