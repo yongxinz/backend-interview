@@ -254,6 +254,9 @@ AJAX,Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）, 是与�
 
 ### 21.怎么实现强行关闭客户端和服务器之间的连接?
 ### 22.简述TCP和UDP的区别以及优缺点?
+
+推荐：[简述TCP和UDP的区别以及优缺点](https://github.com/yongxinz/tech-blog/blob/master/TCP%E5%92%8CUDP%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%BC%BA%E7%82%B9%E5%92%8C%E5%8C%BA%E5%88%AB.md)
+
 ### 23.简述浏览器通过WSGI请求动态资源的过程?
 
 浏览器发送的请求被Nginx监听到，Nginx根据请求的URL的PATH或者后缀把请求静态资源的分发到静态资源的目录，别的请求根据配置好的转发到相应端口。
