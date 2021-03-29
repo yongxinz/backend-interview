@@ -639,7 +639,7 @@ from mysingleton import my_singleton
 my_singleton.foo()
 ```
 
-**[单例模式伯乐在线详细解释](http://python.jobbole.com/87294/)**
+**[单例模式详细解释](https://www.cnblogs.com/huchong/p/8244279.html)**
 
 ### 17.Python中的作用域
 
