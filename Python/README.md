@@ -828,6 +828,11 @@ What is the difference between range and xrange functions in Python 2.X?
 
 http://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x
 
+
+### 31 python 字典的内部实现原理介绍
+
+https://cloud.tencent.com/developer/article/1664241
+
 # Python基础
 
 ## 文件操作
