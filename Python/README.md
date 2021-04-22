@@ -230,7 +230,11 @@ print a  # [1]
 
 ### 2.Python中的元类(metaclass)
 
-这个非常的不常用,但是像ORM这种复杂的结构还是会需要的,详情请看:http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python
+这个非常的不常用,但是像ORM这种复杂的结构还是会需要的。
+
+扩展阅读：
+1.https://www.liaoxuefeng.com/wiki/1016959663602400/1017592449371072
+2.[深入理解Python中的元类(metaclass)](https://www.cnblogs.com/JetpropelledSnake/p/9094103.html)
 
 ### 3.@staticmethod和@classmethod
 
