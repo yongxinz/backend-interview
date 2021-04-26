@@ -405,10 +405,6 @@ http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
 
 ### 9.迭代器和生成器
 
-这个是stackoverflow里python排名第一的问题,值得一看: http://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do-in-python
-
-这是中文版: http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/1/README.html
-
 这里有个关于生成器的创建问题面试官有考：
 问：将列表生成式中 `[]` 改成 `()` 之后数据结构是否改变？ 
 答案：是，从列表变为生成器。
@@ -493,9 +489,7 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 概括的讲，**装饰器的作用就是为已经存在的对象添加额外的功能。**
 
-这个问题比较大,推荐: http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python
-
-中文: http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/3/README.html
+推荐：[Python 面向切面编程 AOP 和装饰器](https://mp.weixin.qq.com/s?src=11&timestamp=1619481363&ver=3033&signature=qVv9*2qGxuNtx6Ux5I7veLnQ5NS*CFBHXVzQGduiKVX8hodBvoasdAknUqzWoYBOuYQxnXKAWBOEwLEtq6SYtRPFbxh*QBQmtv6TvjpXwAbdC4X3xHN0FVydhEoQkbv8&new=1)
 
 ### 12.鸭子类型
 
