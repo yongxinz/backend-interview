@@ -503,6 +503,8 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 鸭子类型在动态语言中经常使用，非常灵活，使得python不想java那样专门去弄一大堆的设计模式。
 
+推荐：https://cloud.tencent.com/developer/article/1484390
+
 ### 13.Python中重载
 
 引自知乎:http://www.zhihu.com/question/20053359
@@ -638,7 +640,7 @@ from mysingleton import my_singleton
 my_singleton.foo()
 ```
 
-**[单例模式详细解释](https://www.cnblogs.com/huchong/p/8244279.html)**
+推荐：[单例模式详细解释](https://www.cnblogs.com/huchong/p/8244279.html)
 
 ### 17.Python中的作用域
 
