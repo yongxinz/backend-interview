@@ -13,8 +13,6 @@
     - [10.连接的种类](#10连接的种类)
     - [11.数据库优化的思路](#11数据库优化的思路)
     - [12.存储过程与触发器的区别](#12存储过程与触发器的区别)
-    - [13.悲观锁和乐观锁是什么？](#13悲观锁和乐观锁是什么)
-    - [14.你常用的mysql引擎有哪些?各引擎间有什么区别?](#13你常用的mysql引擎有哪些各引擎间有什么区别)
 
 <!-- /TOC -->
 
@@ -26,9 +24,9 @@
 
 ### 2.数据库索引
 
-推荐: http://tech.meituan.com/mysql-index.html
-
 [MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
+
+[面试中常被提到的最左前缀匹配原则](https://www.cnblogs.com/ljl150/p/12934071.html)
 
 聚集索引,非聚集索引,B-Tree,B+Tree,最左前缀原理
 
@@ -38,7 +36,7 @@
 
 乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。
 
-乐观锁与悲观锁的具体区别: http://www.cnblogs.com/Bob-FD/p/3352216.html
+乐观锁与悲观锁的具体区别: https://juejin.cn/post/6844903639207641096#heading-1
 
 ### 4.MVCC
 
@@ -61,7 +59,7 @@ innodb会为每一行添加两个字段，分别表示该行**创建的版本**�
 
 通过MVCC很好的实现了事务的隔离性，可以达到repeated read级别，要实现serializable还必须加锁。
 
-> 参考：[MVCC浅析](http://blog.csdn.net/chosen0ne/article/details/18093187)
+参考：[MVCC浅析](http://blog.csdn.net/chosen0ne/article/details/18093187)
 
 ### 5.MyISAM和InnoDB
 
@@ -119,5 +117,3 @@ drop直接删掉表，truncate删除表中数据，再插入时自增长id又从
 ### 10.连接的种类
 ### 11.数据库优化的思路
 ### 12.存储过程与触发器的区别
-### 13.悲观锁和乐观锁是什么？
-### 14.你常用的mysql引擎有哪些?各引擎间有什么区别?
