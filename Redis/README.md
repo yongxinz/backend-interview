@@ -51,7 +51,7 @@ slave从redis宕机，配置主从复制的时候才配置从的redis，从的�
 
 2、Redis不仅仅支持简单的k/v类型的数据，同时还提供list,set,hash等数据结构的存储
 
-3、虚拟内存-redis当物流内存用完时，可以将一些很久没用的value交换到磁盘
+3、虚拟内存-redis当物理内存用完时，可以将一些很久没用的value交换到磁盘
 
 4、过期策略-memcache在set时就指定，例如set key1 0 0 8，即永不过期。Redis可以通过例如expire设定，例如expire name 10
 
