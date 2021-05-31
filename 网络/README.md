@@ -311,3 +311,5 @@ AJAX,Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）, 是与�
 推荐：https://juejin.im/post/59eb06b1f265da430f313c7f
 
 ### 32.url的形式？
+
+1、TCP 阻塞如何解决。
