@@ -96,31 +96,26 @@ drop直接删掉表，truncate删除表中数据，再插入时自增长id又从
 
 为表设置索引要付出代价的：一是增加了数据库的存储空间，二是在插入和修改数据时要花费较多的时间（因为索引也要随之变动）
 
-### 10.连接的种类
-### 11.数据库优化的思路
-### 12.存储过程与触发器的区别
 
-13、MySQL 理解，事务隔离级别，MVCC，三个日志文件作用。
+### 常用索引数据结构，以及MySQL B 树 B+ 树区别。
 
-14、MySQL  B 树  B+ 树区别。
+https://mp.weixin.qq.com/s/d7Zfat2fP6IX5DMKKtEIjQ
 
-15、MySQL 优化，查询如何优化等。
 
-16、MySQL 的 ACID 理解，如何保证的，MySQL 底层架构是啥。
+### 如何对 MySQL 进行服务器扩容。
 
-17、MySQL 为什么不建议用 Text。
+https://mp.weixin.qq.com/s/r6usm2DkSC4Qx3FRSoMCNA
 
-18、MySQL 各种索引跟如何优化。
 
-19、如何对 MySQL 进行服务器扩容。
+### 分库分表相关
 
-项目上如何设计索引的呀
-写 SQL 有哪些需要注意的
-分库分表相关
-数据太多怎么查询
-常问索引结构，为什么要这样设计？
-能说说索引查找的流程么？了解多少说多少
-如何优化 SQL
-隔离级别、MVCC
-MySQL 的锁机制
-redo log 、undo log 之类的
+https://mp.weixin.qq.com/s/dGECnPailOkMX476KoTQfg
+
+### 隔离级别、MVCC
+
+https://mp.weixin.qq.com/s/XOBhxc_AiuUxvwBsB_JprQ
+
+### MySQL 的锁机制
+
+https://mp.weixin.qq.com/s/ezBZhZaUqQtASPeT5TKslw
+https://mp.weixin.qq.com/s/ZNdBk22Un-7wIYz2fM7-xA

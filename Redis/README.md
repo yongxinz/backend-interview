@@ -1,19 +1,7 @@
-<!-- TOC -->
 
-- [Redis](#redis)
-  - [1.Redis是什么？](#1redis%e6%98%af%e4%bb%80%e4%b9%88)
-  - [3.Redis缺点](#3redis%e7%bc%ba%e7%82%b9)
-  - [4.Redis宕机怎么解决?](#4redis%e5%ae%95%e6%9c%ba%e6%80%8e%e4%b9%88%e8%a7%a3%e5%86%b3)
-  - [5.redis和mecached的区别，以及使用场景](#5redis%e5%92%8cmecached%e7%9a%84%e5%8c%ba%e5%88%ab%e4%bb%a5%e5%8f%8a%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af)
-  - [6.Redis集群方案该怎么做?都有哪些方案?](#6redis%e9%9b%86%e7%be%a4%e6%96%b9%e6%a1%88%e8%af%a5%e6%80%8e%e4%b9%88%e5%81%9a%e9%83%bd%e6%9c%89%e5%93%aa%e4%ba%9b%e6%96%b9%e6%a1%88)
-  - [7.Redis回收进程是如何工作的](#7redis%e5%9b%9e%e6%94%b6%e8%bf%9b%e7%a8%8b%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84)
+### 1、Redis 是什么？
 
-<!-- /TOC -->
-
-## Redis
-### 1.Redis是什么？
-
-1. 是一个完全开源免费的key-value内存数据库 
+1. 是一个完全开源免费的 key-value 内存数据库 
 2. 通常被认为是一个数据结构服务器，主要是因为其有着丰富的数据结构 strings、hash、list、sets、sorted sets
 
 通常局限点来说，Redis也以消息队列的形式存在，作为内嵌的List存在，满足实时的高并发需求。在使用缓存的时候，redis比memcached具有更多的优势，并且支持更多的数据类型，把redis当作一个中间存储系统，用来处理高并发的数据库操作。
@@ -22,18 +10,18 @@
 - 持久化：对数据的更新采用Copy-on-write技术，可以异步地保存到磁盘上，主要有两种策略，一是根据时间，更新次数的快照（save 300 10 ）二是基于语句追加方式(Append-only file，aof) 
 - 自动操作：对不同数据类型的操作都是自动的，很安全 
 - 快速的主--从复制，官方提供了一个数据，Slave在21秒即完成了对Amazon网站10G key set的复制。 
-- Sharding技术： 很容易将数据分布到多个Redis实例中，数据库的扩展是个永恒的话题，在关系型数据库中，主要是以添加硬件、以分区为主要技术形式的纵向扩展解决了很多的应用场景，但随着web2.0、移动互联网、云计算等应用的兴起，这种扩展模式已经不太适合了，所以近年来，像采用主从配置、数据库复制形式的，Sharding这种技术把负载分布到多个特理节点上去的横向扩展方式用处越来越多。
+- Sharding技术：很容易将数据分布到多个Redis实例中，数据库的扩展是个永恒的话题，在关系型数据库中，主要是以添加硬件、以分区为主要技术形式的纵向扩展解决了很多的应用场景，但随着web2.0、移动互联网、云计算等应用的兴起，这种扩展模式已经不太适合了，所以近年来，像采用主从配置、数据库复制形式的，Sharding这种技术把负载分布到多个特定节点上去的横向扩展方式用处越来越多。
 
-### 3.Redis缺点
+### 2、Redis 缺点
 
 - 是数据库容量受到物理内存的限制,不能用作海量数据的高性能读写,因此Redis适合的场景主要局限在较小数据量的高性能操作和运算上。
 - Redis较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂。为避免这一问题，运维人员在系统上线时必须确保有足够的空间，这对资源造成了很大的浪费。
   
-### 4.Redis宕机怎么解决?
+### 3、Redis宕机怎么解决？
 
 宕机:服务器停止服务
 
-如果只有一台redis，肯定 会造成数据丢失，无法挽救
+如果只有一台redis，肯定会造成数据丢失，无法挽救
 
 多台redis或者是redis集群，宕机则需要分为在主从模式下区分来看：
 
@@ -43,7 +31,7 @@ slave从redis宕机，配置主从复制的时候才配置从的redis，从的�
 
 以上过程很容易配置错误，可以使用redis提供的哨兵机制来简化上面的操作。简单的方法:redis的哨兵(sentinel)的功能
 
-### 5.redis和mecached的区别，以及使用场景
+### 4、redis和mecached的区别，以及使用场景
 
 区别
 
@@ -71,7 +59,7 @@ slave从redis宕机，配置主从复制的时候才配置从的redis，从的�
 
 2、如果简单的key/value存储应该选择memcached.
 
-### 6.Redis集群方案该怎么做?都有哪些方案?
+### 5、Redis集群方案该怎么做?都有哪些方案?
 
 1、redis 目前用的最多的集群方案，基本和twemproxy一致的效果，但它支持在节点数量改变情况下，旧节点数据客恢复到新hash节点
 
@@ -79,7 +67,7 @@ slave从redis宕机，配置主从复制的时候才配置从的redis，从的�
 
 3、在业务代码层实现，起几个毫无关联的redis实例，在代码层，对key进行hash计算，然后去对应的redis实例操作数据。这种方式对hash层代码要求比较高，考虑部分包括，节点失效后的替代算法方案，数据震荡后的字典脚本恢复，实例的监控，等等
 
-### 7.Redis回收进程是如何工作的
+### 6、Redis回收进程是如何工作的
 
 一个客户端运行了新的命令，添加了新的数据。
 
@@ -89,24 +77,47 @@ redis检查内存使用情况，如果大于maxmemory的限制，则根据设定
 
 如果一个命令的结果导致大量内存被使用(例如很大的集合的交集保存到一个新的键)，不用多久内存限制就会被这个内存使用量超越。
 
-8、Redis 跟 MySQL 缓存一致性。
+### 7、Redis 跟 MySQL 缓存一致性
 
-9、Redis 的几个基本数据类型，底层实现。
+https://zhuanlan.zhihu.com/p/59167071
 
-10、Redis 为什么那么快，Redis 底层实现。
+### 8、Redis 的几个基本数据类型，底层实现
 
-11、Redis 中常见集群部署情况，出现性能问题如何排查。
+https://zhuanlan.zhihu.com/p/344918922
 
-12、Redis 中的事务。
+### 9、Redis 为什么那么快
 
-13、Redis IO 多路复用机制。
+- https://zhuanlan.zhihu.com/p/160157573
+- https://xie.infoq.cn/article/b3816e9fe3ac77684b4f29348
 
-你的项目为什么会选择用Redis而不是Memcache（技术选型）
-你项目中一般怎么用 Redis 的
-线上遇到 Redis 的相关问题没
-你对 Redis 了解有多深？源码看过吗
-说说 Redis rehash
-Redis 集群了解么？
-Redis 分布式锁怎么用？有什么问题？
+### 10、Redis 中常见集群部署情况，出现性能问题如何排查。
 
-什么过期策略啊，AOF 之类的
+https://mp.weixin.qq.com/s/q79ji-cgfUMo7H0p254QRg
+
+### 11、Redis 中的事务。
+
+https://mp.weixin.qq.com/s/Hevg_4YJT_PzVd1Z_yE1TQ
+
+### 12、缓存雪崩、击穿、穿透
+
+https://mp.weixin.qq.com/s/_StOUX9Nu-Bo8UpX7ThZmg
+
+### 13、Redis 的持久化
+
+https://mp.weixin.qq.com/s/yP2HH8840OMY4e7tKMymiA
+
+### 14、Redis不是号称单线程也有很高的性能么？为啥还需要多线程？
+
+https://mp.weixin.qq.com/s/SYUYvKCxsyMbdBsRrJOZqA
+
+### 15、Redis 过期策略和内存淘汰机制
+
+https://segmentfault.com/a/1190000023060522
+
+### 16、Redis 分布式锁怎么用？有什么问题？
+
+https://mp.weixin.qq.com/s/IoDPieqgY995cyyWAQrQew
+
+### 17、Redis为什么变慢了？一文讲透如何排查Redis性能问题
+
+https://mp.weixin.qq.com/s/Qc4t_-_pL4w8VlSoJhRDcg

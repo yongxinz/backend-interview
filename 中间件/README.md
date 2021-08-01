@@ -2,17 +2,23 @@
 
 1、Kafka 为什么那么快？
 
+https://mp.weixin.qq.com/s/gmzIcvYvig2cDIcHJAnDRg
+
 2、Kafka 重平衡是怎么做的？
 
+https://mp.weixin.qq.com/s/4DFup_NziFJ1xdc4bZnVcg
+
 3、Kafka 架构体系
+
+https://mp.weixin.qq.com/s/QF9b9vpncLS24xMzFkanTQ
 
 
 ### RabbitMQ
 
-1、RabbitMQ 工作的几种不同模式，数据如何保证顺序性跟不丢失，如何避免数据重复消费。
+1、RabbitMQ 高频考题
 
-2、RabbitMQ 中的 TTL。
+https://mp.weixin.qq.com/s/XEMuc1QJX8TAe7_fqcmJBA
 
-3、RabbitMQ 如何保证消息不丢失，如何保证消息顺序性。
+2、RabbitMQ 跟 Kafka 对比下，说下对 MQ 
 
-4、RabbitMQ 跟 Kafka 对比下，说下对 MQ 的理解。
+https://mp.weixin.qq.com/s/XtMKQr7TaOjZkXgXZWh6lg
