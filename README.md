@@ -1,6 +1,10 @@
-广而告之，欢迎关注我的微信公众号 AlwaysBeta，更多精彩内容等你来。
+广而告之，欢迎关注我的微信公众号 AlwaysBeta，满满后端开发技术干货，更多精彩内容等你来。
 
 ![](http://ww1.sinaimg.cn/large/0061a0TTgy1gaqr087j9xj3076076wex.jpg)
+
+想学习 Go 的同学可以到这里看看：https://github.com/yongxinz/gopher
+
+Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战开发，面试刷题，必读书单等一系列资源。
 
 ### 
 
