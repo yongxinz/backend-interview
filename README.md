@@ -2,6 +2,10 @@
 
 ![](http://ww1.sinaimg.cn/large/0061a0TTgy1gaqr087j9xj3076076wex.jpg)
 
+想学习 Go 的同学可以到这里看看：https://github.com/yongxinz/gopher
+
+Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战开发，面试刷题，必读书单等一系列资源。
+
 ### 
 
 # 后端面试题汇总
