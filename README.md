@@ -50,6 +50,8 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 - [MySQL数据库经典面试题解析](MySQL/mysql-interview.md)
 - [MySQL InnoDB MVCC 机制的原理及实现](MySQL/mysql-mvcc.md)
 - [为什么MySQL使用B+树做索引？](MySQL/mysql-index-b-plus.md)
+- [20 道 MySQL 面试题](https://mp.weixin.qq.com/s/KVnMi45dvuLaRjoxcmpbNw)
+- [看一遍就理解：order by 详解](https://mp.weixin.qq.com/s/h9jWeoyiBGnQLvDrtXqVWw)
 
 ### Redis
 
