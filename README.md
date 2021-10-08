@@ -63,6 +63,7 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 - [Redis主从复制原理](Redis/redis-master-slave.md)
 - [Redis 夺命连环 20 问](https://mp.weixin.qq.com/s/PUSpuyh6dOi2zWM6J0-EJA)
 - [Redis的事务满足原子性吗？](https://mp.weixin.qq.com/s/KAdivX9aYK2NgUJsDeKCpA)
+- [缓存和数据库一致性问题](https://mp.weixin.qq.com/s/4W7vmICGx6a_WX701zxgPQ)
 
 ### MongoDB
 
