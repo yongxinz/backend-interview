@@ -12,6 +12,10 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 
 包括 Python、Go、Redis、MySQL、PostgreSQL、Kafka、数据结构、算法、编程、网络等相关内容，欢迎关注。
 
+## 沟通交流
+
+- [如何向面试官提问？](https://github.com/yongxinz/InterviewThis)
+
 ## Python
 
 - [Python 常考题](https://github.com/yongxinz/backend-interview/tree/master/Python)
