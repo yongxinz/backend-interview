@@ -50,6 +50,7 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 ## 数据库
 ### MySQL
 
+- [小林coding图解 MySQL](https://xiaolincoding.com/mysql/)
 - [MySQL 常考题](https://github.com/yongxinz/backend-interview/tree/master/MySQL)
 - [MySQL数据库经典面试题解析](MySQL/mysql-interview.md)
 - [MySQL InnoDB MVCC 机制的原理及实现](MySQL/mysql-mvcc.md)
@@ -59,6 +60,7 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 
 ### Redis
 
+- [小林coding图解 Redis](https://xiaolincoding.com/redis/)
 - [Redis 常考题](https://github.com/yongxinz/backend-interview/tree/master/Redis)
 - [Redis 基础数据结构](Redis/redis.md)
 - [Redis中的底层数据结构](Redis/redis-data-structure.md)
@@ -68,6 +70,8 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 - [Redis 夺命连环 20 问](https://mp.weixin.qq.com/s/PUSpuyh6dOi2zWM6J0-EJA)
 - [Redis的事务满足原子性吗？](https://mp.weixin.qq.com/s/KAdivX9aYK2NgUJsDeKCpA)
 - [缓存和数据库一致性问题](https://mp.weixin.qq.com/s/4W7vmICGx6a_WX701zxgPQ)
+- [深入理解跳表及其在 Redis 中的应用](https://mp.weixin.qq.com/s/ncr0EYG5495_HeCGSJ0z3A)
+- [Redis为什么变慢了？一文讲透如何排查Redis性能问题](https://mp.weixin.qq.com/s/Qc4t_-_pL4w8VlSoJhRDcg)
 
 ### MongoDB
 
@@ -80,6 +84,10 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 ## 项目与架构
 
 - [项目与架构常考题](项目与架构/README.md)
+- [如何设计一个秒杀系统？](https://mp.weixin.qq.com/s/kWqgzMw4qKek7QUfkDSwNg)
+- [如何设计一个短链服务？](https://mp.weixin.qq.com/s/33lcKX3bLUAC-Mj0VlXa6A)
+- [18 张图，详解微服务架构](https://mp.weixin.qq.com/s/ApjJcOxEPD3TTRiRW3XtxA)
+- [搞懂异地多活，看这篇就够了](https://mp.weixin.qq.com/s/T6mMDdtTfBuIiEowCpqu6Q)
 
 ## 数据结构与算法
 
@@ -87,11 +95,14 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 
 ## 系统编程
 
+- [小林coding图解系统](https://xiaolincoding.com/os/)
 - [系统编程常考题](https://github.com/yongxinz/backend-interview/tree/master/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B)
 
 ## 网络
 
+- [小林coding图解网络](https://xiaolincoding.com/network/)
 - [网络常考题](https://github.com/yongxinz/backend-interview/tree/master/%E7%BD%91%E7%BB%9C)
+- [既然有 HTTP 协议，为什么还要有 RPC](https://mp.weixin.qq.com/s/eTjsAXEjeSB9BF89xFUktQ)
 
 ## 编程题
 
