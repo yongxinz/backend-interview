@@ -1,4 +1,4 @@
-广而告之，欢迎关注我的微信公众号 AlwaysBeta，满满后端开发技术干货，更多精彩内容等你来。
+广而告之，欢迎关注我的微信公众号 AlwaysBeta，专注分享后端开发技术干货，更多精彩内容等你来。
 
 ![](http://ww1.sinaimg.cn/large/0061a0TTgy1gaqr087j9xj3076076wex.jpg)
 
