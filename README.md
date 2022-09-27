@@ -72,6 +72,7 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 - [缓存和数据库一致性问题](https://mp.weixin.qq.com/s/4W7vmICGx6a_WX701zxgPQ)
 - [深入理解跳表及其在 Redis 中的应用](https://mp.weixin.qq.com/s/ncr0EYG5495_HeCGSJ0z3A)
 - [Redis为什么变慢了？一文讲透如何排查Redis性能问题](https://mp.weixin.qq.com/s/Qc4t_-_pL4w8VlSoJhRDcg)
+- [浅析 Redis 分布式锁解决方案](https://www.infoq.cn/article/dvaaj71f4fbqsxmgvdce)
 
 ### MongoDB
 
