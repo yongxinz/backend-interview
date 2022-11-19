@@ -87,6 +87,8 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 - [项目与架构常考题](项目与架构/README.md)
 - [如何设计一个秒杀系统？](https://mp.weixin.qq.com/s/kWqgzMw4qKek7QUfkDSwNg)
 - [如何设计一个短链服务？](https://mp.weixin.qq.com/s/33lcKX3bLUAC-Mj0VlXa6A)
+- [如何设计 Feed 流系统？](https://mp.weixin.qq.com/s/1O5rJtUDOOmlrXt373BaLQ)
+- [高并发场景下，红包雨怎么实现？](https://mp.weixin.qq.com/s/q1BPuqFDpdQC_AodeOabsA)
 - [18 张图，详解微服务架构](https://mp.weixin.qq.com/s/ApjJcOxEPD3TTRiRW3XtxA)
 - [搞懂异地多活，看这篇就够了](https://mp.weixin.qq.com/s/T6mMDdtTfBuIiEowCpqu6Q)
 
