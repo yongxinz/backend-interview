@@ -22,6 +22,7 @@ Go 学习路线图，包括基础专栏，进阶专栏，源码阅读，实战�
 
 ## Go
 - [Go 语言 new 和 make 关键字的区别](https://mp.weixin.qq.com/s/NBDkI3roHgNgW1iW4e_6cA)
+- [Go 语言数组和切片的区别](https://mp.weixin.qq.com/s/esaAmAdmV4w3_qjtAzTr4A)
 - [交替打印数字和字母](Go/q001.md)
 - [判断字符串中字符是否全都不同](Go/q002.md)
 - [翻转字符串](Go/q003.md)
