@@ -1,6 +1,8 @@
 广而告之，欢迎关注我的微信公众号 AlwaysBeta，专注分享后端开发技术干货，面试真题，助你轻轻松松进大厂。
 
-![](http://ww1.sinaimg.cn/large/0061a0TTgy1gaqr087j9xj3076076wex.jpg)
+<center class="half">
+    <img src="https://cdn.jsdelivr.net/gh/yongxinz/picb@main/data/WechatIMG29.jpeg" width="300"/>
+</center>
 
 想学习 Go 的同学可以到这里看看：https://github.com/yongxinz/gopher
 
